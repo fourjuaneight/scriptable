@@ -22,4 +22,3 @@ const shortcuts = 'shortcuts://';
 
 Pasteboard.copy(pretty);
 Safari.open(shortcuts);
-// console.log(pretty)
