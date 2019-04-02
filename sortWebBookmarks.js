@@ -4,12 +4,10 @@
 const sort = importModule('sortJSON');
 
 const FM = FileManager.iCloud();
-const local = FM.bookmarkedPath(`Scriptable`);
-const json = FM.readString(`${local}/web.json`);
+const repo = FM.bookmarkedPath(`Bookmarks`);
+const json = FM.readString(`${repo}/web.json`);
 const web = JSON.parse(json);
 const keys = Object.keys(web);
-const { articles, comics, podcasts, tweets, videos } = web;
-
 
 for (const key of keys) {
   sort.sortByKey(json, web[key], 'Creator');
