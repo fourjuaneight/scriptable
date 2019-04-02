@@ -7,5 +7,5 @@ module.exports.sortByKey = (json, array, key) => {
     const y = b[key];
     return x < y ? -1 : x > y ? 1 : 0;
   });
-  return json[array] = sorted;
+  return (json[array] = sorted);
 };

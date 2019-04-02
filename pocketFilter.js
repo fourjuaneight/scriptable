@@ -5,12 +5,14 @@ const cont = Pasteboard.paste();
 const json = JSON.parse(cont);
 let res = {};
 
-for (entry in json) {
-  const { resolved_title } = json[entry];
-  const { item_id } = json[entry];
-  const articles = {[resolved_title]: item_id};
-  res = {...res, ...articles};
-} 
+for (const entry in json) {
+  if (Object.prototype.hasOwnProperty.call(json, entry)) {
+    const { resolved_title } = json[entry];
+    const { item_id } = json[entry];
+    const articles = { [resolved_title]: item_id };
+    res = { ...res, ...articles };
+  }
+}
 
 const pretty = JSON.stringify(res, undefined, 2);
 const shortcuts = `shortcuts://`;

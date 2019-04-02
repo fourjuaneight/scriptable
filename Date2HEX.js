@@ -7,9 +7,11 @@ module.exports.dateSplit = () => {
   const arrDate = iso.match(/\d{2,4}/g);
   const intArr = arrDate.map(Number);
   const hexArr = [];
-  for (i in intArr) {
-    const hexDt = intArr[i].toString(16);
-    hexArr.push(hexDt);
+  for (const i in intArr) {
+    if (Object.prototype.hasOwnProperty.call(intArr, i)) {
+      const hexDt = intArr[i].toString(16);
+      hexArr.push(hexDt);
+    }
   }
-  return hexArr.join('');
+  return hexArr.join(``);
 };
