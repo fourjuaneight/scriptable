@@ -38,4 +38,4 @@ const save = async repoName => {
 
 // Backup and save Scripts
 save(`Scriptable`);
-save(`Pythonista`);
+// save(`Pythonista`);
