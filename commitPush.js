@@ -3,13 +3,12 @@
 // icon-color: light-gray; icon-glyph: code-branch;
 // Commit changes with enconded message and push changes
 module.exports.save = async (repo, message) => {
-  const secretKey = `RP72JUCGLD`;
-  const encodedMessage = ``;
-
+  const key = `RP72JUCGLD`;
+  
   // Backup scripts
   const url = `working-copy://x-callback-url/chain`;
   const callback = new CallbackURL(url);
-  callback.addParameter(`key`, secretKey);
+  callback.addParameter(`key`, key);
   callback.addParameter(`repo`, repo);
   callback.addParameter(`command`, `commit`);
   callback.addParameter(`message`, message);
