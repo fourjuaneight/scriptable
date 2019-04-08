@@ -3,7 +3,7 @@
 // icon-color: light-gray; icon-glyph: code-branch;
 // Commit changes with enconded message and push changes
 module.exports.save = async (repo, message) => {
-  const key = `RP72JUCGLD`;
+  const key = ``;
   
   // Backup scripts
   const url = `working-copy://x-callback-url/chain`;

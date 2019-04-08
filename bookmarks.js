@@ -9,7 +9,7 @@ const commit = importModule('commitPush');
 const FM = FileManager.iCloud();
 
 // Get bookmarks JSON from repo.
-const repo = FM.bookmarkedPath(`Test`);
+const repo = FM.bookmarkedPath(`Bookmarks`);
 const json = FM.readString(`${repo}/web.json`);
 const web = JSON.parse(json);
 
