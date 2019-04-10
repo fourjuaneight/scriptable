@@ -37,9 +37,9 @@ const verifyParams = async () => {
   // Get webpage meta.
   const req = new Request(url);
   const html = await req.loadString();
-  const titleRegExp = new RegExp("<title>(.*)</title>");
+  const titleRegExp = new RegExp("<title(\\s.*)?>(.*)</title>");
   const titleMatch = html.match(titleRegExp);
-  const title = titleMatch[1];
+  const title = titleMatch[titleMatch.length - 1];
   
   // Verify params.
   const prompt = new Alert();
@@ -81,7 +81,7 @@ const pretty = JSON.stringify(web, undefined, 2);
 FM.writeString(`${repo}/web.json`, pretty);
 
 // Commit changes with enconded message and push changes
-commit.save(`Test`, `New ${section} bookmark saved.`);
+commit.save(`Bookmarks`, `New ${section} bookmark saved.`);
 
 // Back to Safari
 Safari.open(url);
