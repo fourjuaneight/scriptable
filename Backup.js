@@ -18,7 +18,7 @@ const backup = (localPath, repoPath) => {
 };
 // Commit changes with enconded message and push changes
 const save = async repoName => {
-  const secretKey = `RP72JUCGLD`;
+  const secretKey = `3Fvd8ejzC`;
   const offset = new Date().getTimezoneOffset() * 60000;
   const date = new Date(Date.now() - offset).toISOString().substring(0, 10);
   const encodedMessage = `Scripts backed up on ${date}.`;
