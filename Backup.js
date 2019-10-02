@@ -16,26 +16,8 @@ const backup = (localPath, repoPath) => {
     }
   });
 };
-// Commit changes with enconded message and push changes
-const save = async repoName => {
-  const secretKey = `3Fvd8ejzC`;
-  const offset = new Date().getTimezoneOffset() * 60000;
-  const date = new Date(Date.now() - offset).toISOString().substring(0, 10);
-  const encodedMessage = `Scripts backed up on ${date}.`;
-
-  // Backup scripts
-  backup(repoName, `${repoName}-repo`)
-  const url = `working-copy://x-callback-url/chain`;
-  const callback = new CallbackURL(url);
-  callback.addParameter(`key`, secretKey);
-  callback.addParameter(`repo`, repoName.toLowerCase());
-  callback.addParameter(`command`, `commit`);
-  callback.addParameter(`message`, encodedMessage);
-  callback.addParameter(`limit`, `999`);
-  callback.addParameter(`command`, `push`);
-  await callback.open();
-};
 
 // Backup and save Scripts
-save(`Scriptable`);
-// save(`Pythonista`);
+backup('Scripts', 'Scriptable');
+Safari.open('shortcuts://');
+Script.complete();
