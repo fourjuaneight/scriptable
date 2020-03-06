@@ -10,7 +10,7 @@ const backup = (localPath, repoPath) => {
 
   scripts.forEach(s => {
     const updated = FM.readString(`${local}/${s}`);
-  
+
     if (updated !== null) {
       FM.writeString(`${repo}/${s}`, updated);
     }
@@ -18,6 +18,6 @@ const backup = (localPath, repoPath) => {
 };
 
 // Backup and save Scripts
-backup('Scripts', 'Scriptable');
+backup('scripts', 'scriptable');
 Safari.open('shortcuts://');
 Script.complete();
