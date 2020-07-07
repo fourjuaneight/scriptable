@@ -4,12 +4,14 @@
 const params = args.shortcutParameter;
 const response = JSON.parse(params.data);
 const category = params.category;
-const key = params.key.length > 0 ? params.key : 'url';
-const results = response.data[category];
+const key = params.key.length > 0 ? params.key : "url";
 
+// extract fields dictionary inside each object
+const fields = response.records.map((record) => record.fields);
+// create object with title as the key and url (or other specified param) as the value
 const list = Object.assign(
   {},
-  ...results.map(item => ({ [item.title]: item[key] }))
+  ...fields.map((item) => ({ [item.title]: item[key] }))
 );
 
 Script.setShortcutOutput(JSON.stringify(list, undefined, 2));
