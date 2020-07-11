@@ -3,7 +3,6 @@
 // icon-color: deep-purple; icon-glyph: paint-brush;
 const params = args.shortcutParameter;
 const response = JSON.parse(params.data);
-const category = params.category;
 const key = params.key.length > 0 ? params.key : "url";
 
 // extract fields dictionary inside each object

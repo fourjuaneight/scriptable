@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: meh-blank;
 // share-sheet-inputs: url;
-const regex = importModule('UnicodeRange.js');
+const regex = importModule('unicodeRange.js');
 const params = args.shortcutParameter;
 
 const emojiUnicode = emoji => {
@@ -22,7 +22,9 @@ const emojiUnicode = emoji => {
   return comp;
 };
 
-const clean = tweet => tweet.replace(regex, p1 => `${emojiUnicode(p1)}`);
+const clean = str => str.replace(regex, p1 => `${emojiUnicode(p1)}`);
 
 Script.setShortcutOutput(clean(params));
 Script.complete();
+
+module.exports = clean;
