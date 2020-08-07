@@ -6,7 +6,7 @@
  *
  * @return {number}
  */
-const euclideanAlgorithmIterative = (originalA, originalB) => {
+const euclideanGCDIterative = (originalA, originalB) => {
   // Make input numbers positive.
   let a = Math.abs(originalA);
   let b = Math.abs(originalB);
@@ -21,4 +21,4 @@ const euclideanAlgorithmIterative = (originalA, originalB) => {
   return a || b;
 };
 
-module.exports = euclideanAlgorithmIterative;
+module.exports = euclideanGCDIterative;
