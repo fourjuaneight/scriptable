@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: green; icon-glyph: stream;
 /**
  * Calculates the square root of the number with given tolerance (precision)
  * by using Newton's method.

@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: green; icon-glyph: stream;
 /**
  * Default comparison function. It just assumes that "a" and "b" are strings or numbers.
  *
