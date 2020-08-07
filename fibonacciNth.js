@@ -1,0 +1,28 @@
+/**
+ * Calculate fibonacci number at specific position using Dynamic Programming approach
+ *
+ * @param {number} num
+ *
+ * @return {number}
+ */
+const fibonacciNth = num => {
+  let currentValue = 1;
+  let previousValue = 0;
+
+  if (num === 1) {
+    return 1;
+  }
+
+  let iterationsCounter = num - 1;
+
+  while (iterationsCounter) {
+    currentValue += previousValue;
+    previousValue = currentValue - previousValue;
+
+    iterationsCounter -= 1;
+  }
+
+  return currentValue;
+};
+
+module.exports = fibonacciNth;
