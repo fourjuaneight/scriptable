@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: green; icon-glyph: stream;
+// icon-color: green; icon-glyph: bullseye;
 /**
  * Calculate fibonacci number at specific position using Dynamic Programming approach
  *

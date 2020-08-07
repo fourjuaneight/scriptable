@@ -19,5 +19,3 @@ const backup = (localPath, repoPath) => {
 
 // Backup and save Scripts
 backup('scripts', 'scriptable');
-Safari.open('shortcuts://');
-Script.complete();
