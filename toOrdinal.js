@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: orange; icon-glyph: fax;
 /**
  * Number to ordinal string. It leverages JS's treatment of indices to an array. If you pass an array an index that’s outside the range, it returns undefined, which is considered false.
  *
