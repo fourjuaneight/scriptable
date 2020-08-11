@@ -25,9 +25,7 @@ const compare = (a, b) => {
  *
  * @return {boolean}
  */
-const equal = (a, b) => {
-  return compare(a, b) === 0;
-};
+const equal = (a, b) => compare(a, b) === 0;
 
 /**
  * Checks if variable "a" is less than "b".
@@ -37,9 +35,7 @@ const equal = (a, b) => {
  *
  * @return {boolean}
  */
-const lessThan = (a, b) => {
-  return compare(a, b) < 0;
-};
+const lessThan = (a, b) => compare(a, b) < 0;
 
 /**
  * Checks if variable "a" is less than or equal to "b".
@@ -49,9 +45,7 @@ const lessThan = (a, b) => {
  *
  * @return {boolean}
  */
-const lessThanOrEqual = (a, b) => {
-  return lessThan(a, b) || equal(a, b);
-};
+const lessThanOrEqual = (a, b) => lessThan(a, b) || equal(a, b);
 
 /**
  * Checks if variable "a" is greater than "b".
@@ -61,9 +55,7 @@ const lessThanOrEqual = (a, b) => {
  *
  * @return {boolean}
  */
-const greaterThan = (a, b) => {
-  return compare(a, b) > 0;
-};
+const greaterThan = (a, b) => compare(a, b) > 0;
 
 /**
  * Checks if variable "a" is greater than or equal to "b".
@@ -73,9 +65,7 @@ const greaterThan = (a, b) => {
  *
  * @return {boolean}
  */
-const greaterThanOrEqual = (a, b) => {
-  return greaterThan(a, b) || equal(a, b);
-};
+const greaterThanOrEqual = (a, b) => greaterThan(a, b) || equal(a, b);
 
 exports.compare = compare;
 exports.equal = equal;

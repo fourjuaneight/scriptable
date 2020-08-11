@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: green; icon-glyph: sort-alpha-down;
 const code = args.shortcutParameter;
-const key = args.plainTexts;
+const objKey = args.plainTexts;
 
 const sortByKey = (json, key) => {
   const sorted = json.sort((a, b) => {
@@ -10,10 +10,11 @@ const sortByKey = (json, key) => {
     const y = b[key];
     return x < y ? -1 : x > y ? 1 : 0;
   });
-  return (json = sorted);
+
+  return sorted;
 };
 
-const sorted = sortByKey(code, key);
+const uglyJSON = sortByKey(code, objKey);
 const pretty = JSON.stringify(uglyJSON, undefined, 2);
 
 Script.setShortcutOutput(pretty);

@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: green; icon-glyph: sort-amount-down;
-const { equal, lessThan } = importModule("comparison");
+const { equal, lessThan } = importModule('comparison');
 
 /**
  * Quick sort
@@ -10,7 +10,7 @@ const { equal, lessThan } = importModule("comparison");
  *
  * @return {number[]}
  */
-const quickSort = (originalArray) => {
+const quickSort = originalArray => {
   // Clone original array to prevent it from modification.
   const array = [...originalArray];
 

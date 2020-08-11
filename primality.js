@@ -8,7 +8,7 @@
  *
  * @return {boolean}
  */
-const primality = (num) => {
+const primality = num => {
   // Check if num is integer.
   if (num % 1 !== 0) {
     return false;

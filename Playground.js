@@ -6,9 +6,9 @@
 
 const fetch = async url => {
   const request = new Request(url);
-  const response = await request.load();
- 
+  await request.load();
+
   return request.response.url;
-}
+};
 
 fetch('https://t.co/Ls0QcDVNzq');

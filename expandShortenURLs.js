@@ -8,10 +8,10 @@ const cleanText = clean(text);
 // Expand shortend URLs
 const expandLinks = async url => {
   const request = new Request(url);
-  const response = await request.load();
- 
+  await request.load();
+
   return request.response.url;
-}
+};
 
 // Async find and replace from string
 const asyncReplace = async (str, regex, fn) => {
@@ -25,5 +25,9 @@ const asyncReplace = async (str, regex, fn) => {
   return str.replace(regex, () => data.shift());
 };
 
-Script.setShortcutOutput(await asyncReplace(cleanText, /(https:\/\/t.co\/[a-zA-z0-9]+)/g, expandLinks).then(result => result));
+Script.setShortcutOutput(
+  asyncReplace(cleanText, /(https:\/\/t.co\/[a-zA-z0-9]+)/g, expandLinks).then(
+    result => result
+  )
+);
 Script.complete();

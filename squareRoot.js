@@ -12,7 +12,7 @@
 const squareRoot = (number, tolerance = 0) => {
   // For now we won't support operations that involves manipulation with complex numbers.
   if (number < 0) {
-    throw new Error("The method supports only positive integers");
+    throw new Error('The method supports only positive integers');
   }
 
   // Handle edge case with finding the square root of zero.

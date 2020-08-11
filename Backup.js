@@ -8,11 +8,11 @@ const backup = (localPath, repoPath) => {
   const repo = FM.bookmarkedPath(repoPath);
   const scripts = FM.listContents(local);
 
-  scripts.forEach(s => {
-    const updated = FM.readString(`${local}/${s}`);
+  scripts.forEach(script => {
+    const updated = FM.readString(`${local}/${script}`);
 
     if (updated !== null) {
-      FM.writeString(`${repo}/${s}`, updated);
+      FM.writeString(`${repo}/${script}`, updated);
     }
   });
 };

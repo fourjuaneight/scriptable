@@ -4,8 +4,8 @@
  * @param  {number} num
  * @return {string} ordinal number
  */
-const toOrdinal = (num) => {
-  const str = ["th", "st", "nd", "rd"];
+const toOrdinal = num => {
+  const str = ['th', 'st', 'nd', 'rd'];
   // returns a negative number when its first operand (the dividend) is negative
   const val = num % 100;
   // returns the value of the first operand if it’s true and the value of the second operand otherwise
