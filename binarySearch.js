@@ -8,7 +8,7 @@ const { equal, lessThan } = importModule('comparison');
  * @return {number}
  */
 
-export default function binarySearch(sortedArray, seekElement) {
+const binarySearch = (sortedArray, seekElement) => {
   // These two indices will contain current array (sub-array) boundaries.
   let startIndex = 0;
   let endIndex = sortedArray.length - 1;
@@ -36,4 +36,6 @@ export default function binarySearch(sortedArray, seekElement) {
 
   // Return -1 if we have not found anything.
   return -1;
-}
+};
+
+module.exports = binarySearch;

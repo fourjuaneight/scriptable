@@ -7,7 +7,7 @@ const { equal } = importModule('comparison');
  * @param {*} seekElement
  * @return {number[]}
  */
-export default function linearSearch(array, seekElement) {
+const linearSearch = (array, seekElement) => {
   const foundIndices = [];
 
   array.forEach((element, index) => {
@@ -17,4 +17,6 @@ export default function linearSearch(array, seekElement) {
   });
 
   return foundIndices;
-}
+};
+
+module.exports = linearSearch;
