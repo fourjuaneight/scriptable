@@ -1,0 +1,5 @@
+# Ignoring as following the linter rules will break some of the rules
+.eslintrc.js
+lint-staged.config.js
+prettier.config.js
+templates/config

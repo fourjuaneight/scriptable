@@ -1,0 +1,48 @@
+{
+  "name": "scriptable",
+  "version": "1.0.0",
+  "description": "Collection of Scriptable helper scripts (internal and for Shortcuts).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fourjuaneight/scriptable.git"
+  },
+  "keywords": [
+    "shortcuts",
+    "scriptable"
+  ],
+  "author": "Juan Villela",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fourjuaneight/scriptable/issues"
+  },
+  "homepage": "https://github.com/fourjuaneight/scriptable#readme",
+  "scripts": {
+    "clean:node": "rm -rf node_modules",
+    "format": "prettier --write \"*.js\"",
+    "lint": "eslint --fix \"*.js\""
+  },
+  "lint-staged": {
+    "*.(ts|tsx)": [
+      "npm lint"
+    ],
+    "*.+(ts|tsx|css|scss)": [
+      "npm format",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/eslint-parser": "^7.11.3",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  }
+}
