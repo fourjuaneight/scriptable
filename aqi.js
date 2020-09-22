@@ -1,17 +1,19 @@
 // widget code by Jason Snell <jsnell@sixcolors.com>
 // based on code by Matt Silverlock
 // gradient routine contributed by Rob Silverii
+// pretty formatting and functioning by Adam Lickel
 
 const API_URL = 'https://www.purpleair.com/json?show=';
-// const CACHE_FILE = "aqi_data.json"
+
 // Find a nearby PurpleAir sensor ID via https://fire.airnow.gov/
 // Click a sensor near your location: the ID is the trailing integers
 // https://www.purpleair.com/json has all sensors by location & ID.
-const SENSOR_ID = '30169';
+let SENSOR_ID = args.widgetParameter || '30169';
 
+// Fetch content from PurpleAir
 const getSensorData = async (url, id) => {
-  const req = new Request(`${url}${id}`);
-  const json = await req.loadJSON();
+  let req = new Request(`${url}${id}`);
+  let json = await req.loadJSON();
 
   return {
     adj1: json.results[0].pm2_5_cf_1,
@@ -72,31 +74,27 @@ const levelAttributes = [
 ];
 
 // Get level attributes for AQI
-const getLevelAttributes = (level, attributes) =>
-  attributes
+const getLevelAttributes = (level, attributes) => {
+  let applicableAttributes = attributes
     .filter(c => level > c.threshold)
-    .sort((a, b) => b.threshold - a.threshold)[0];
-
-// Calculates the AQI level based on
-// https://cfpub.epa.gov/airnow/index.cfm?action=aqibasics.aqi#unh
-const calculateLevel = aqi => {
-  let res = {
-    endColor: 'white',
-    label: 'fine',
-    level: 'OK',
-    startColor: 'white',
-  };
-
-  const level = parseInt(aqi, 10) || 0;
-
-  // Set attributes
-  res = getLevelAttributes(level, levelAttributes);
-  // Set level
-  res.level = level;
-  return res;
+    .sort((a, b) => b.threshold - a.threshold);
+  return applicableAttributes[0];
 };
 
-//Function to get AQI number from PPM reading
+// Function to get the EPA adjusted PPM
+const computePM = data => {
+  let adj1 = parseInt(data.adj1, 10);
+  let adj2 = parseInt(data.adj2, 10);
+  let hum = parseInt(data.hum, 10);
+  let dataAverage = (adj1 + adj2) / 2;
+
+  // Apply EPA draft adjustment for wood smoke and PurpleAir
+  // from https://cfpub.epa.gov/si/si_public_record_report.cfm?dirEntryId=349513&Lab=CEMM&simplesearch=0&showcriteria=2&sortby=pubDate&timstype=&datebeginpublishedpresented=08/25/2018
+
+  return 0.524 * dataAverage - 0.0085 * hum + 5.71;
+};
+
+// Function to get AQI number from PPM reading
 const aqiFromPM = pm => {
   if (pm > 350.5) {
     return calcAQI(pm, 500.0, 401.0, 500.0, 350.5);
@@ -112,114 +110,136 @@ const aqiFromPM = pm => {
     return calcAQI(pm, 100.0, 51.0, 35.4, 12.1);
   } else if (pm >= 0.0) {
     return calcAQI(pm, 50.0, 0.0, 12.0, 0.0);
+  } else {
+    return '-';
   }
-  return '-';
 };
 
-//Function that actually calculates the AQI number
+// Function that actually calculates the AQI number
 const calcAQI = (Cp, Ih, Il, BPh, BPl) => {
-  const a = Ih - Il;
-  const b = BPh - BPl;
-  const c = Cp - BPl;
+  let a = Ih - Il;
+  let b = BPh - BPl;
+  let c = Cp - BPl;
   return Math.round((a / b) * c + Il);
 };
 
+// Calculates the AQI level based on
+// https://cfpub.epa.gov/airnow/index.cfm?action=aqibasics.aqi#unh
+const calculateLevel = aqi => {
+  let res = {
+    level: 'OK',
+    label: 'fine',
+    startColor: 'white',
+    endColor: 'white',
+  };
+
+  let level = parseInt(aqi, 10) || 0;
+
+  // Set attributes
+  res = getLevelAttributes(level, levelAttributes);
+  // Set level
+  res.level = level;
+  return res;
+};
+
+// Function to get the AQI trends suffix
+const trendsFromStats = stats => {
+  let partLive = parseInt(stats.v1, 10);
+  let partTime = parseInt(stats.v2, 10);
+  let partDelta = partTime - partLive;
+
+  if (partDelta > 5) {
+    theTrend = ' Improving';
+  } else if (partDelta < -5) {
+    theTrend = ' Worsening';
+  } else {
+    theTrend = '';
+  }
+  return theTrend;
+};
+
 const run = async () => {
-  const wg = new ListWidget();
+  let wg = new ListWidget();
   wg.setPadding(20, 15, 10, 10);
+
   try {
-    console.info(`Using sensor ID: ${SENSOR_ID}`);
-    const data = await getSensorData(API_URL, SENSOR_ID);
-    console.info(data);
-    const stats = JSON.parse(data.val);
-    const partLive = parseInt(stats.v1, 10);
-    const partTime = parseInt(stats.v2, 10);
-    const partDelta = partTime - partLive;
+    console.log(`Using sensor ID: ${SENSOR_ID}`);
 
-    if (partDelta > 5) {
-      theTrend = ' Improving';
-    } else if (partDelta < -5) {
-      theTrend = ' Worsening';
-    } else {
-      theTrend = '';
-    }
+    let data = await getSensorData(API_URL, SENSOR_ID);
+    let stats = JSON.parse(data.val);
+    console.log(stats);
 
-    console.info(theTrend);
+    let theTrend = trendsFromStats(stats);
+    console.log(theTrend);
 
-    const adj1 = parseInt(data.adj1, 10);
-    const adj2 = parseInt(data.adj2, 10);
-    const hum = parseInt(data.hum, 10);
-    const dataAverage = (adj1 + adj2) / 2;
+    let epaPM = computePM(data);
+    console.log(epaPM);
 
-    // Apply EPA draft adjustment for wood smoke and PurpleAir
-    // from https://cfpub.epa.gov/si/si_public_record_report.cfm?dirEntryId=349513&Lab=CEMM&simplesearch=0&showcriteria=2&sortby=pubDate&timstype=&datebeginpublishedpresented=08/25/2018
+    let aqi = aqiFromPM(epaPM);
+    let level = calculateLevel(aqi);
+    let aqiText = aqi.toString();
+    console.log(aqi);
+    console.log(level.level);
 
-    const epaPM = 0.524 * dataAverage - 0.0085 * hum + 5.71;
-
-    console.info(epaPM);
-
-    const aqi = aqiFromPM(epaPM);
-    const level = calculateLevel(aqi);
-    const aqitext = aqi.toString();
-    console.info(aqi);
-    console.info(level.level);
-    const startColor = new Color(level.startColor);
-    const endColor = new Color(level.endColor);
-    const gradient = new LinearGradient();
+    let startColor = new Color(level.startColor);
+    let endColor = new Color(level.endColor);
+    let textColor = new Color(level.textColor);
+    let gradient = new LinearGradient();
     gradient.colors = [startColor, endColor];
     gradient.locations = [0.0, 1];
-    console.info(gradient);
+    console.log(gradient);
 
     wg.backgroundGradient = gradient;
 
-    const header = wg.addText('AQI' + theTrend);
-    header.textColor = new Color(level.textColor);
+    let header = wg.addText('AQI' + theTrend);
+    header.textColor = textColor;
     header.font = Font.regularSystemFont(15);
 
-    const content = wg.addText(aqitext);
-    content.textSize = 45;
-    content.textColor = new Color(level.textColor);
+    let content = wg.addText(aqiText);
+    content.textColor = textColor;
     content.font = Font.semiboldRoundedSystemFont(45);
 
-    const wordLevel = wg.addText(level.label);
-    wordLevel.textColor = new Color(level.textColor);
+    let wordLevel = wg.addText(level.label);
+    wordLevel.textColor = textColor;
     wordLevel.font = Font.boldSystemFont(15);
 
-    const spacerOne = wg.addSpacer(10);
+    wg.addSpacer(10);
 
-    const id = wg.addText(data.loc);
-    id.textColor = new Color(level.textColor);
-    id.font = Font.mediumSystemFont(12);
+    let location = wg.addText(data.loc);
+    location.textColor = textColor;
+    location.font = Font.mediumSystemFont(12);
 
-    const updatedAt = new Date(data.ts * 1000).toLocaleTimeString('en-US', {
+    let updatedAt = new Date(data.ts * 1000).toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
-      timeZone: 'PST',
     });
-    const ts = wg.addText(`Updated ${updatedAt}`);
-    ts.textColor = new Color(level.textColor);
+    let ts = wg.addText(`Updated ${updatedAt}`);
+    ts.textColor = textColor;
     ts.font = Font.lightSystemFont(10);
 
-    const spacerTop = wg.addSpacer();
+    wg.addSpacer(10);
 
-    const purpleMap =
+    let purpleMap =
       'https://www.purpleair.com/map?opt=1/i/mAQI/a10/cC0&select=' +
       SENSOR_ID +
       '#14/' +
       data.lat +
       '/' +
       data.lon;
-
     wg.url = purpleMap;
-  } catch (error) {
-    console.error(error);
-    const err = wg.addText(`error: ${e}`);
-    err.textSize = 10;
+  } catch (e) {
+    console.log(e);
+
+    let err = wg.addText(`${e}`);
     err.textColor = Color.red();
     err.textOpacity = 30;
+    err.font = Font.regularSystemFont(10);
   }
 
-  wg.presentSmall();
+  if (config.runsInApp) {
+    wg.presentSmall();
+  }
+
   Script.setWidget(wg);
   Script.complete();
 };
