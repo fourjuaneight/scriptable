@@ -2,11 +2,11 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: purple; icon-glyph: flask;
 const BACKGROUND_DARK_MODE = 'system';
-// options: "yes", "no", "system
+// options: "yes", "no", "system"
 
 let RANDOM = false;
 // show the alt text at the bottom of the image.
-const SHOW_ALT = true;
+const SHOW_ALT = false;
 
 // default is current comic
 // set the Parameter value to "random" in the
@@ -22,7 +22,7 @@ const isUsingDarkAppearance = async () => {
   const js =
     "(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)";
   const resp = await view.evaluateJavaScript(js);
-  Ï;
+
   return resp;
 };
 
@@ -69,7 +69,7 @@ const createWidget = async data => {
   widget.addSpacer();
 
   if (SHOW_ALT) {
-    const subTxt = w.addText(`${data.num}: ${data.alt}`);
+    const subTxt = widget.addText(`${data.num}: ${data.alt}`);
     subTxt.font = Font.mediumSystemFont(10);
     subTxt.textColor = Color.white();
     subTxt.textOpacity = 0.9;
@@ -97,11 +97,12 @@ const xkcd = async random => {
 // load data and create widget
 const loadData = async () => await xkcd(RANDOM);
 const data = await loadData();
+console.log(data);
 const widget = await createWidget(data);
 
 if (config.runsInWidget) {
   Script.setWidget(widget);
   Script.complete();
 } else {
-  await widget.presentLarge();
+  Safari.open(`https://xkcd.com/${data.num}`);
 }
