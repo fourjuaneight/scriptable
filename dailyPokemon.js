@@ -22,7 +22,7 @@ if (config.runsInWidget) {
 
   widget.backgroundImage = imgBq;
 
-  const title = widget.addText('Pokemon del día');
+  const title = widget.addText('Pokemon of the day');
   title.textColor = Color.black();
   title.textOpacity = 0.8;
   title.font = new Font('Courier', 16);

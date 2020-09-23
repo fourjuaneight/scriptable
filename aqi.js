@@ -164,31 +164,19 @@ const run = async () => {
   wg.setPadding(20, 15, 10, 10);
 
   try {
-    console.log(`Using sensor ID: ${SENSOR_ID}`);
-
     const data = await getSensorData(API_URL, SENSOR_ID);
     const stats = JSON.parse(data.val);
-    console.log(stats);
-
     const theTrend = trendsFromStats(stats);
-    console.log(theTrend);
-
     const epaPM = computePM(data);
-    console.log(epaPM);
-
     const aqi = aqiFromPM(epaPM);
     const level = calculateLevel(aqi);
     const aqiText = aqi.toString();
-    console.log(aqi);
-    console.log(level.level);
-
     const startColor = new Color(level.startColor);
     const endColor = new Color(level.endColor);
     const textColor = new Color(level.textColor);
     const gradient = new LinearGradient();
     gradient.colors = [startColor, endColor];
     gradient.locations = [0.0, 1];
-    console.log(gradient);
 
     wg.backgroundGradient = gradient;
 
@@ -229,7 +217,7 @@ const run = async () => {
       data.lon;
     wg.url = purpleMap;
   } catch (e) {
-    console.log(e);
+    console.error(e);
 
     const err = wg.addText(`${e}`);
     err.textColor = Color.red();
