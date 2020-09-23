@@ -1,7 +1,8 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: purple; icon-glyph: flask;
-// options: "yes", "no", "system"
+const BACKGROUND_DARK_MODE = 'system';
+// options: "yes", "no", "system
 
 let RANDOM = false;
 // show the alt text at the bottom of the image.
