@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: purple; icon-glyph: helicopter;
 // widget code by Jason Snell <jsnell@sixcolors.com>
 // based on code by Matt Silverlock
 // gradient routine contributed by Rob Silverii

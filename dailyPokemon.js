@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: purple; icon-glyph: gamepad;
 const numberDay = () => {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
