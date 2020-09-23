@@ -8,12 +8,12 @@ const API_URL = 'https://www.purpleair.com/json?show=';
 // Find a nearby PurpleAir sensor ID via https://fire.airnow.gov/
 // Click a sensor near your location: the ID is the trailing integers
 // https://www.purpleair.com/json has all sensors by location & ID.
-let SENSOR_ID = args.widgetParameter || '30169';
+const SENSOR_ID = args.widgetParameter || '30169';
 
 // Fetch content from PurpleAir
 const getSensorData = async (url, id) => {
-  let req = new Request(`${url}${id}`);
-  let json = await req.loadJSON();
+  const req = new Request(`${url}${id}`);
+  const json = await req.loadJSON();
 
   return {
     adj1: json.results[0].pm2_5_cf_1,
@@ -75,7 +75,7 @@ const levelAttributes = [
 
 // Get level attributes for AQI
 const getLevelAttributes = (level, attributes) => {
-  let applicableAttributes = attributes
+  const applicableAttributes = attributes
     .filter(c => level > c.threshold)
     .sort((a, b) => b.threshold - a.threshold);
   return applicableAttributes[0];
@@ -83,10 +83,10 @@ const getLevelAttributes = (level, attributes) => {
 
 // Function to get the EPA adjusted PPM
 const computePM = data => {
-  let adj1 = parseInt(data.adj1, 10);
-  let adj2 = parseInt(data.adj2, 10);
-  let hum = parseInt(data.hum, 10);
-  let dataAverage = (adj1 + adj2) / 2;
+  const adj1 = parseInt(data.adj1, 10);
+  const adj2 = parseInt(data.adj2, 10);
+  const hum = data.hum ? parseInt(data.hum, 10) : 0;
+  const dataAverage = (adj1 + adj2) / 2;
 
   // Apply EPA draft adjustment for wood smoke and PurpleAir
   // from https://cfpub.epa.gov/si/si_public_record_report.cfm?dirEntryId=349513&Lab=CEMM&simplesearch=0&showcriteria=2&sortby=pubDate&timstype=&datebeginpublishedpresented=08/25/2018
@@ -117,23 +117,24 @@ const aqiFromPM = pm => {
 
 // Function that actually calculates the AQI number
 const calcAQI = (Cp, Ih, Il, BPh, BPl) => {
-  let a = Ih - Il;
-  let b = BPh - BPl;
-  let c = Cp - BPl;
+  const a = Ih - Il;
+  const b = BPh - BPl;
+  const c = Cp - BPl;
+
   return Math.round((a / b) * c + Il);
 };
 
 // Calculates the AQI level based on
 // https://cfpub.epa.gov/airnow/index.cfm?action=aqibasics.aqi#unh
 const calculateLevel = aqi => {
-  let res = {
+  const level = parseInt(aqi, 10) || 0;
+  const baseRes = {
     level: 'OK',
     label: 'fine',
     startColor: 'white',
     endColor: 'white',
   };
-
-  let level = parseInt(aqi, 10) || 0;
+  let res = baseRes;
 
   // Set attributes
   res = getLevelAttributes(level, levelAttributes);
@@ -144,9 +145,9 @@ const calculateLevel = aqi => {
 
 // Function to get the AQI trends suffix
 const trendsFromStats = stats => {
-  let partLive = parseInt(stats.v1, 10);
-  let partTime = parseInt(stats.v2, 10);
-  let partDelta = partTime - partLive;
+  const partLive = parseInt(stats.v1, 10);
+  const partTime = parseInt(stats.v2, 10);
+  const partDelta = partTime - partLive;
 
   if (partDelta > 5) {
     theTrend = ' Improving';
@@ -159,67 +160,67 @@ const trendsFromStats = stats => {
 };
 
 const run = async () => {
-  let wg = new ListWidget();
+  const wg = new ListWidget();
   wg.setPadding(20, 15, 10, 10);
 
   try {
     console.log(`Using sensor ID: ${SENSOR_ID}`);
 
-    let data = await getSensorData(API_URL, SENSOR_ID);
-    let stats = JSON.parse(data.val);
+    const data = await getSensorData(API_URL, SENSOR_ID);
+    const stats = JSON.parse(data.val);
     console.log(stats);
 
-    let theTrend = trendsFromStats(stats);
+    const theTrend = trendsFromStats(stats);
     console.log(theTrend);
 
-    let epaPM = computePM(data);
+    const epaPM = computePM(data);
     console.log(epaPM);
 
-    let aqi = aqiFromPM(epaPM);
-    let level = calculateLevel(aqi);
-    let aqiText = aqi.toString();
+    const aqi = aqiFromPM(epaPM);
+    const level = calculateLevel(aqi);
+    const aqiText = aqi.toString();
     console.log(aqi);
     console.log(level.level);
 
-    let startColor = new Color(level.startColor);
-    let endColor = new Color(level.endColor);
-    let textColor = new Color(level.textColor);
-    let gradient = new LinearGradient();
+    const startColor = new Color(level.startColor);
+    const endColor = new Color(level.endColor);
+    const textColor = new Color(level.textColor);
+    const gradient = new LinearGradient();
     gradient.colors = [startColor, endColor];
     gradient.locations = [0.0, 1];
     console.log(gradient);
 
     wg.backgroundGradient = gradient;
 
-    let header = wg.addText('AQI' + theTrend);
+    const header = wg.addText('AQI' + theTrend);
     header.textColor = textColor;
     header.font = Font.regularSystemFont(15);
 
-    let content = wg.addText(aqiText);
+    const content = wg.addText(aqiText);
     content.textColor = textColor;
     content.font = Font.semiboldRoundedSystemFont(45);
 
-    let wordLevel = wg.addText(level.label);
+    const wordLevel = wg.addText(level.label);
     wordLevel.textColor = textColor;
     wordLevel.font = Font.boldSystemFont(15);
 
     wg.addSpacer(10);
 
-    let location = wg.addText(data.loc);
+    const location = wg.addText(data.loc);
     location.textColor = textColor;
     location.font = Font.mediumSystemFont(12);
 
-    let updatedAt = new Date(data.ts * 1000).toLocaleTimeString([], {
+    const updatedAt = new Date(data.ts * 1000).toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
     });
-    let ts = wg.addText(`Updated ${updatedAt}`);
+    const ts = wg.addText(`Updated ${updatedAt}`);
     ts.textColor = textColor;
     ts.font = Font.lightSystemFont(10);
 
     wg.addSpacer(10);
 
-    let purpleMap =
+    const purpleMap =
       'https://www.purpleair.com/map?opt=1/i/mAQI/a10/cC0&select=' +
       SENSOR_ID +
       '#14/' +
@@ -230,7 +231,7 @@ const run = async () => {
   } catch (e) {
     console.log(e);
 
-    let err = wg.addText(`${e}`);
+    const err = wg.addText(`${e}`);
     err.textColor = Color.red();
     err.textOpacity = 30;
     err.font = Font.regularSystemFont(10);
