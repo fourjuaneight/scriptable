@@ -1,3 +1,6 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: deep-green; icon-glyph: magic;
 const createEventDate = () => {
   const str = '2020-10-13T17:00:00Z';
   const dateFormatter = new DateFormatter();

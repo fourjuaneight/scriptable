@@ -45,4 +45,7 @@ if (config.runsInWidget) {
 
   Script.setWidget(widget);
   Script.complete();
+} else {
+  const url = `https://serebii.net/pokedex/${numberDay()}.shtml`;
+  console.log(url);
 }

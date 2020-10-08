@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: blue; icon-glyph: feather;
+// icon-color: deep-purple; icon-glyph: feather;
 const clean = importModule('emojiToUnicode');
 
 const text = args.shortcutParameter;

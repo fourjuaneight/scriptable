@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: green; icon-glyph: greater-than;
+// icon-color: green; icon-glyph: calculator;
 /**
  * Iterative version of Euclidean Algorithm of finding greatest common divisor (GCD)
  *

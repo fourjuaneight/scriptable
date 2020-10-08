@@ -11,7 +11,7 @@ const SHOW_ALT = false;
 // default is current comic
 // set the Parameter value to "random" in the
 // Edit Widget screen to use a random comic
-if (args.widgetParameter == 'random') {
+if (args.widgetParameter === 'random') {
   RANDOM = true;
 }
 
@@ -69,7 +69,7 @@ const createWidget = async data => {
   widget.addSpacer();
 
   if (SHOW_ALT) {
-    const subTxt = widget.addText(`${data.num}: ${data.alt}`);
+    const subTxt = widget.addText(data.alt);
     subTxt.font = Font.mediumSystemFont(10);
     subTxt.textColor = Color.white();
     subTxt.textOpacity = 0.9;
@@ -97,7 +97,6 @@ const xkcd = async random => {
 // load data and create widget
 const loadData = async () => await xkcd(RANDOM);
 const data = await loadData();
-console.log(data);
 const widget = await createWidget(data);
 
 if (config.runsInWidget) {

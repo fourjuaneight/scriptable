@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: orange; icon-glyph: meh-blank;
+// icon-color: light-brown; icon-glyph: meh-blank;
 // share-sheet-inputs: url;
 const regex = importModule('unicodeRange.js');
 const params = args.shortcutParameter;

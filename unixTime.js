@@ -1,6 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: orange; icon-glyph: clock; share-sheet-inputs: url;
+// icon-color: light-gray; icon-glyph: clock;
+// share-sheet-inputs: url;
 const { unixTime } = importModule('dateStd');
 
 Script.setShortcutOutput(unixTime);
