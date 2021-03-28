@@ -1,14 +1,14 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: sort-amount-down;
-const { lessThanOrEqual } = importModule('comparison');
+const { lessThanOrEqual } = importModule("comparison");
 
 /**
  * Merge arrays
+ * @function
  *
  * @param {number[]} leftArray
  * @param {number[]} rightArray
- *
  * @return {number[]}
  */
 const mergeSortedArrays = (leftArray, rightArray) => {
@@ -44,12 +44,12 @@ const mergeSortedArrays = (leftArray, rightArray) => {
 
 /**
  * Merge sort
+ * @function
  *
  * @param {number[]} originalArray
- *
  * @return {number[]}
  */
-const mergeSort = originalArray => {
+const mergeSort = (originalArray) => {
   // If array is empty or consists of one element then return this array since it is sorted.
   if (originalArray.length <= 1) {
     return originalArray;

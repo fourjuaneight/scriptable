@@ -1,9 +1,16 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: deep-purple; icon-glyph: archive;
+// icon-color: deep-purple; icon-glyph: cloud-upload-alt;
 const params = args.shortcutParameter;
 
-const saveRecord = async data => {
+/**
+ * Upload record to Airtbale base table.
+ * @function
+ *
+ * @param {object} data Record to be saved
+ * @returns {void}
+ */
+const saveRecord = async (data) => {
   const endpoint = `${data.table}/${data.tableName}`;
   const payload = {
     records: [
@@ -17,22 +24,24 @@ const saveRecord = async data => {
       },
     ],
   };
-  const req = new Request(endpoint);
-  
-  req.method = 'POST';
-  req.headers = { 
+  const request = new Request(endpoint);
+
+  request.method = "POST";
+  request.headers = {
     Authorization: `Bearer ${data.key}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
-  req.body = JSON.stringify(payload);
-  
+  request.body = JSON.stringify(payload);
+
   try {
-    const resp = await req.loadJSON();
-    
-    Script.setShortcutOutput({ status: "ok", data: resp.records[0].fields });
-  } catch(err) {
+    const response = await request.loadJSON();
+
+    Script.setShortcutOutput({
+      status: "ok",
+      data: response.records[0].fields,
+    });
+  } catch (err) {
     console.error(err);
-  
     Script.setShortcutOutput({ status: "error", data: err });
   }
 };

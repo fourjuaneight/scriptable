@@ -3,10 +3,10 @@
 // icon-color: green; icon-glyph: calculator;
 /**
  * Recursive version of Euclidean Algorithm of finding greatest common divisor (GCD).
+ * @function
  *
  * @param {number} originalA
  * @param {number} originalB
- *
  * @return {number}
  */
 const euclideanGCD = (originalA, originalB) => {

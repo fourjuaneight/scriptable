@@ -4,6 +4,14 @@
 const code = args.shortcutParameter;
 const objKey = args.plainTexts;
 
+/**
+ * Sort object by key.
+ * @function
+ *
+ * @param {object} json object to sort
+ * @param {string} key key to sort by
+ * @returns {object} sorted object
+ */
 const sortByKey = (json, key) => {
   const sorted = json.sort((a, b) => {
     const x = a[key];

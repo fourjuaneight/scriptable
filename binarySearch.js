@@ -1,16 +1,16 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: blue; icon-glyph: search-minus;
-const { equal, lessThan } = importModule('comparison');
+const { equal, lessThan } = importModule("comparison");
 
 /**
  * Binary search implementation.
+ * @function
  *
  * @param {*[]} sortedArray
  * @param {*} seekElement
  * @return {number}
  */
-
 const binarySearch = (sortedArray, seekElement) => {
   // These two indices will contain current array (sub-array) boundaries.
   let startIndex = 0;

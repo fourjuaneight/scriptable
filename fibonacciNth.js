@@ -3,12 +3,12 @@
 // icon-color: green; icon-glyph: calculator;
 /**
  * Calculate fibonacci number at specific position using Dynamic Programming approach
+ * @function
  *
  * @param {number} num
- *
  * @return {number}
  */
-const fibonacciNth = num => {
+const fibonacciNth = (num) => {
   let currentValue = 1;
   let previousValue = 0;
 

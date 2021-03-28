@@ -1,33 +1,56 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: deep-purple; icon-glyph: feather;
-const clean = importModule('emojiToUnicode');
+// icon-color: light-brown; icon-glyph: feather;
+/**
+ * Expand shortend URLs.
+ * @function
+ *
+ * @param {string} url shortned url string
+ * @returns {Promise<string>} expanded URL
+ */
+const expandLinks = async (url) => {
+  try {
+    const request = new Request(url);
+    await request.load();
 
-const text = args.shortcutParameter;
-const cleanText = clean(text);
-// Expand shortend URLs
-const expandLinks = async url => {
-  const request = new Request(url);
-  await request.load();
+    if (!request.response.url) {
+      console.error({
+        message: "Expand Links: unable to expand URL.",
+        status: request.response.statusCode,
+      });
+      return url;
+    }
 
-  return request.response.url;
+    return request.response.url;
+  } catch (error) {
+    console.error("Expand Links:", error);
+    return url;
+  }
 };
 
-// Async find and replace from string
-const asyncReplace = async (str, regex, fn) => {
+/**
+ * Get expanded URLs.
+ * @function
+ *
+ * @param {string} str string to replace
+ * @param {RegExp} regex pattern to match
+ * @returns {Promise<string>} list of expanded URLs from str
+ */
+const expandShortLink = async (str, regex) => {
   const promises = [];
-  str.replace(regex, (match, ...args) => {
-    const promise = fn(match, ...args);
-    promises.push(promise);
-  });
-  const data = await Promise.all(promises);
+  const pattern = new RegExp(regex);
 
-  return str.replace(regex, () => data.shift());
+  str.replace(pattern, (match, ...args) => {
+    const promise = expandLinks(match);
+    promises.push(promise);
+
+    return match;
+  });
+
+  const data = await Promise.all(promises);
+  const replacer = () => data.shift() ?? "";
+
+  return str.replace(regex, replacer);
 };
 
-Script.setShortcutOutput(
-  asyncReplace(cleanText, /(https:\/\/t.co\/[a-zA-z0-9]+)/g, expandLinks).then(
-    result => result
-  )
-);
-Script.complete();
+module.exports = expandShortLink;

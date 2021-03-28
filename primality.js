@@ -3,12 +3,12 @@
 // icon-color: green; icon-glyph: calculator;
 /**
  * Check if number is prime
+ * @function
  *
  * @param {number} num
- *
  * @return {boolean}
  */
-const primality = num => {
+const primality = (num) => {
   // Check if num is integer.
   if (num % 1 !== 0) {
     return false;

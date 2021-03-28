@@ -4,15 +4,16 @@
 /**
  * Calculates the square root of the number with given tolerance (precision)
  * by using Newton's method.
+ * @function
  *
- * @param number - the number we want to find a square root for.
- * @param [tolerance] - how many precise numbers after the floating point we want to get.
+ * @param {number} number - the number we want to find a square root for.
+ * @param {[number]} tolerance - how many precise numbers after the floating point we want to get.
  * @return {number}
  */
 const squareRoot = (number, tolerance = 0) => {
   // For now we won't support operations that involves manipulation with complex numbers.
   if (number < 0) {
-    throw new Error('The method supports only positive integers');
+    throw new Error("The method supports only positive integers");
   }
 
   // Handle edge case with finding the square root of zero.

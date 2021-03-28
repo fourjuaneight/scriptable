@@ -3,12 +3,12 @@
 // icon-color: green; icon-glyph: calculator;
 /**
  * Return a fibonacci sequence as an array
+ * @function
  *
  * @param {number} num
- *
  * @return {number[]}
  */
-const fibonacci = num => {
+const fibonacci = (num) => {
   const fibSequence = [1];
 
   let currentValue = 1;

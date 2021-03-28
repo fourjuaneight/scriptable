@@ -1,6 +1,12 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: purple; icon-glyph: gamepad;
+/**
+ * Get numbered day out of the year.
+ * @function
+ *
+ * @returns {number}
+ */
 const numberDay = () => {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
@@ -11,41 +17,46 @@ const numberDay = () => {
   return day;
 };
 
+/**
+ * Capitalize a string.
+ * @function
+ *
+ * @param {string} str string to be capitalized
+ * @returns {string} capitalized string
+ */
+const toCapitalized = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+
 const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${numberDay()}`;
-const req = new Request(pokemonUrl);
-const res = await req.loadJSON();
+const request = new Request(pokemonUrl);
+const response = await request.loadJSON();
 
 if (config.runsInWidget) {
+  // initialize widget
   const widget = new ListWidget();
 
   const imgReqBq = await new Request(
-    'https://i.pinimg.com/originals/aa/34/e1/aa34e1c76a6569a36499ae86098759ee.jpg'
+    "https://i.pinimg.com/originals/aa/34/e1/aa34e1c76a6569a36499ae86098759ee.jpg"
   );
   const imgBq = await imgReqBq.loadImage();
 
   widget.backgroundImage = imgBq;
 
-  const title = widget.addText('Pokemon of the day');
-  title.textColor = Color.black();
-  title.textOpacity = 0.8;
-  title.font = new Font('Courier', 16);
-
-  widget.addSpacer(5);
-
-  const namePokemon = widget.addText(`#${res.id} - ${res.name}`);
+  // customize
+  const namePokemon = widget.addText(toCapitalized(response.name));
   namePokemon.textColor = Color.black();
   namePokemon.textOpacity = 0.8;
-  namePokemon.font = new Font('Courier', 14);
+  namePokemon.font = new Font("Courier", 14);
+  namePokemon.centerAlignText();
 
-  const imgReq = await new Request(res.sprites.front_default);
-  const img = await imgReq.loadImage();
+  const imgRequest = await new Request(response.sprites.front_default);
+  const imgResponse = await imgRequest.loadImage();
 
-  const image = widget.addImage(img);
+  const image = widget.addImage(imgResponse);
   image.centerAlignImage();
 
   Script.setWidget(widget);
   Script.complete();
 } else {
-  const url = `https://serebii.net/pokedex/${numberDay()}.shtml`;
+  const url = `https://serebii.net/pokedex/${numberDay()}.html`;
   console.log(url);
 }

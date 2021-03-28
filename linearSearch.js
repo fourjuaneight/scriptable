@@ -1,10 +1,11 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: blue; icon-glyph: search-minus;
-const { equal } = importModule('comparison');
+const { equal } = importModule("comparison");
 
 /**
  * Linear search implementation.
+ * @function
  *
  * @param {*[]} array
  * @param {*} seekElement
