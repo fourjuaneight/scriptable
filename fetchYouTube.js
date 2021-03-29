@@ -42,6 +42,7 @@ const getYouTubeDetails = async (url, key) => {
       title: video.title,
       creator: video.channelTitle,
       url,
+      category: "Videos",
     };
   } catch (error) {
     console.error(error);

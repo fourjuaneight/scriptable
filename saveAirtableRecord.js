@@ -7,20 +7,18 @@ const params = args.shortcutParameter;
  * Upload record to Airtbale base table.
  * @function
  *
- * @param {object} data Record to be saved
+ * @param {string} table
+ * @param {string} tableName
+ * @param {string} key auth token
+ * @param {object} fields record to be saved
  * @returns {void}
  */
-const saveRecord = async (data) => {
-  const endpoint = `${data.table}/${data.tableName}`;
+const saveRecord = async (table, tableName, key, fields) => {
+  const endpoint = `${table}/${tableName}`;
   const payload = {
     records: [
       {
-        fields: {
-          title: data.record.title,
-          creator: data.record.creator,
-          url: data.record.url,
-          tags: data.record.tags,
-        },
+        fields,
       },
     ],
   };
@@ -28,7 +26,7 @@ const saveRecord = async (data) => {
 
   request.method = "POST";
   request.headers = {
-    Authorization: `Bearer ${data.key}`,
+    Authorization: `Bearer ${key}`,
     "Content-Type": "application/json",
   };
   request.body = JSON.stringify(payload);
@@ -46,6 +44,6 @@ const saveRecord = async (data) => {
   }
 };
 
-await saveRecord(params);
+await saveRecord(params.table, params.tableName, params.key, params.fields);
 
 Script.complete();

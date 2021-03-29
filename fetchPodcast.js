@@ -110,6 +110,7 @@ const getPodcastDetails = async (url, source) => {
       title: titleCleaner(title, parsing.title),
       creator,
       url: link,
+      category: "Podcasts",
     };
   } catch (error) {
     console.error(error);

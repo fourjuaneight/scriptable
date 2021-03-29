@@ -24,6 +24,7 @@ const getRedditDetails = async (url) => {
       content: post.selftext || post.url_overridden_by_dest,
       subreddit: `r/${post.subreddit}`,
       url,
+      category: "Reddits",
     };
   } catch (error) {
     console.error(error);

@@ -55,7 +55,8 @@ const getTweetDetails = async (url, token) => {
     return {
       tweet: cleanText,
       creator: `@${username}`,
-      url: `https://twitter.com/${username}/status/${response.data.id}`,
+      url: `https://twitter.com/${username}/status/${response.data.id}`,  
+      category: "Tweets",
     };
   } catch (error) {
     console.error(error);

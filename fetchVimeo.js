@@ -45,6 +45,7 @@ const getVimeoDetails = async (url, token) => {
       title: response.name,
       creator: response.user.name,
       url,
+      category: "Videos",
     };
   } catch (error) {
     console.error(error);
