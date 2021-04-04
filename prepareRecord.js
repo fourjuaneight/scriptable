@@ -8,6 +8,7 @@ const record = {
   ...params.fields,
   tags: params.tags.sort(),
 };
+delete record.category;
 
 Script.setShortcutOutput(record);
 Script.complete();

@@ -10,15 +10,16 @@ const params = args.shortcutParameter;
  * @function
  *
  * @param {string} url video url
- * @returns {string} API endpoint to fetch tweet data
+ * @returns {object} API endpoint to fetch video data + bookmarking ready url
  */
 const cleanUrl = (url) => {
-  const updatedStr = url.replace(
-    /(https\:\/\/youtu\.be\/)(.*)/g,
-    "https://youtube.googleapis.com/youtube/v3/videos?id=$2"
-  );
+  const extractedID = url
+    .replace(/(https\:\/\/)(youtu.*)\.(be|com)\/(watch\?v=)?/g, "")
+    .replace("&feature=share", "");
+  const endpoint = `https://youtube.googleapis.com/youtube/v3/videos?id=${extractedID}`;
+  const link = `https://youtu.be/${extractedID}`;
 
-  return updatedStr;
+  return { endpoint, link };
 };
 
 /**
@@ -31,17 +32,17 @@ const cleanUrl = (url) => {
  * @returns {Promise<object>} video title, creator, and url
  */
 const getYouTubeDetails = async (url, key) => {
-  const endpoint = cleanUrl(url);
+  const { endpoint, link } = cleanUrl(url);
   const request = new Request(`${endpoint}&part=snippet&key=${key}`);
 
   try {
     const response = await request.loadJSON();
-    const video = response.items[0].snippet;
+    const video = response.items[0].snippet;  
 
     return {
       title: video.title,
       creator: video.channelTitle,
-      url,
+      url: link,
       category: "Videos",
     };
   } catch (error) {
