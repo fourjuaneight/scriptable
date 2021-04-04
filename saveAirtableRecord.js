@@ -33,17 +33,18 @@ const saveRecord = async (table, tableName, key, fields) => {
 
   try {
     const response = await request.loadJSON();
-
-    Script.setShortcutOutput({
+    
+    return {
       status: "ok",
       data: response.records[0].fields,
-    });
+    };
   } catch (err) {
     console.error(err);
-    Script.setShortcutOutput({ status: "error", data: err });
+    throw new Error(err);
   }
 };
 
-await saveRecord(params.table, params.tableName, params.key, params.fields);
+const results = await saveRecord(params.table, params.tableName, params.key, params.fields);
 
+Script.setShortcutOutput(results);
 Script.complete();

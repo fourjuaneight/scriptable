@@ -4,11 +4,18 @@
 const params = args.shortcutParameter;
 
 // format record to Airtable upload
+const fields = JSON.parse(params.fields);
+const tags = JSON.parse(params.tags);
 const record = {
-  ...params.fields,
-  tags: params.tags.sort(),
+  ...params,
+  fields: {
+    ...fields,
+    tags,
+  },
 };
-delete record.category;
+
+delete record.fields.category;
+delete record.tags;
 
 Script.setShortcutOutput(record);
 Script.complete();

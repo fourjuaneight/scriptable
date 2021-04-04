@@ -37,7 +37,7 @@ const getYouTubeDetails = async (url, key) => {
 
   try {
     const response = await request.loadJSON();
-    const video = response.items[0].snippet;  
+    const video = response.items[0].snippet;
 
     return {
       title: video.title,
