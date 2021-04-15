@@ -4,7 +4,7 @@
 const emojiToUnicode = importModule("emojiToUnicode.js");
 const expandShortenURLs = importModule("expandShortenURLs.js");
 const params = args.shortcutParameter;
-QuickLook.present(params.key, true);
+
 // test: https://twitter.com/fourjuaneight/status/1375312420583976960?s=20
 
 /**
