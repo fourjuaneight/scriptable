@@ -15,10 +15,12 @@ const params = args.shortcutParameter;
  * @returns {string} API endpoint to fetch tweet data
  */
 const cleanUrl = (url) => {
-  const updatedStr = url.replace(
-    /(https\:\/\/twitter\.com\/).*\/status\/([0-9]+)(.*)?/g,
-    "https://api.twitter.com/2/tweets/$2"
-  );
+  const updatedStr = url
+    .replace(/(https\:\/\/([a-z]+\.)?twitter\.com\/)/g, "")
+    .replace(
+      /.*\/status\/([0-9]+)(.*)?/g,
+      "https://api.twitter.com/2/tweets/$1"
+    );
 
   return updatedStr;
 };
@@ -55,7 +57,7 @@ const getTweetDetails = async (url, token) => {
     return {
       tweet: cleanText,
       creator: `@${username}`,
-      url: `https://twitter.com/${username}/status/${response.data.id}`,  
+      url: `https://twitter.com/${username}/status/${response.data.id}`,
       category: "Tweets",
     };
   } catch (error) {
@@ -66,7 +68,7 @@ const getTweetDetails = async (url, token) => {
 
 if (params) {
   const results = await getTweetDetails(params.url, params.key);
-  console.log(results);
+
   Script.setShortcutOutput(results);
   Script.complete();
 }

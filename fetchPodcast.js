@@ -2,7 +2,6 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-purple; icon-glyph: cloud-download-alt;
 const params = args.shortcutParameter;
-
 // test: https://castro.fm/episode/aSwDMX
 
 // list of regular expressions to find and replace
@@ -63,6 +62,19 @@ const paramCleaner = (data, pattern) => {
 };
 
 /**
+ * Escape characters in string for fetch request transport.
+ * @function
+ *
+ * @param {string} str text to escape
+ * @returns {string} request ready text
+ */
+const escapedString = (str) =>
+  str
+    .replace(/(["':]+)/g, "\\$1")
+    .replace(/([,]+)/g, "\\$1")
+    .replace(/"/g, '"');
+
+/**
  * Clean title based on list of patterns.
  * @function
  *
@@ -77,7 +89,7 @@ const titleCleaner = (string, patterns) => {
     cleanTitle = cleanTitle.replace(regexp, "");
   });
 
-  return cleanTitle.replace(/"/g, '"');
+  return escapedString(cleanTitle);
 };
 
 /**
