@@ -42,5 +42,5 @@ const getBookmarksWithOffset = async (offset = null) => {
 
 await getBookmarksWithOffset();
 
-Script.setShortcutOutput({ data: records });
+Script.setShortcutOutput({ records });
 Script.complete();
