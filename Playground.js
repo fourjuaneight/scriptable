@@ -4,5 +4,5 @@
 // share-sheet-inputs: url;
 const params = args.shortcutParameter;
 
-Script.setShortcutOutput();
+Script.setShortcutOutput(results);
 Script.complete();

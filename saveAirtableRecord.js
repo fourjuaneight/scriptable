@@ -33,7 +33,7 @@ const saveRecord = async (table, tableName, key, fields) => {
 
   try {
     const response = await request.loadJSON();
-    
+
     return {
       status: "ok",
       data: response.records[0].fields,
@@ -44,7 +44,12 @@ const saveRecord = async (table, tableName, key, fields) => {
   }
 };
 
-const results = await saveRecord(params.table, params.tableName, params.key, params.fields);
+const results = await saveRecord(
+  params.table,
+  params.tableName,
+  params.key,
+  params.fields
+);
 
 Script.setShortcutOutput(results);
 Script.complete();

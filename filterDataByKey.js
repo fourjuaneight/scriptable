@@ -3,8 +3,8 @@
 // icon-color: light-brown; icon-glyph: filter;
 const params = args.shortcutParameter;
 
-const data = params.data.filter(item =>
-  item[params.filterKey].some(val => params.filters.includes(val))
+const data = params.data.filter((item) =>
+  item[params.filterKey].some((val) => params.filters.includes(val))
 );
 const results = {
   ...params,

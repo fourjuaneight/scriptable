@@ -11,7 +11,7 @@ const params = args.shortcutParameter;
  * @param {string} key kay-value to re-organize by
  * @returns {object} record by title key
  */
-const arrToObj = (array, key = 'title') => {
+const arrToObj = (array, key = "title") => {
   const initialValue = {};
 
   return array.reduce(
