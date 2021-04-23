@@ -12,8 +12,7 @@ const params = args.shortcutParameter;
  * @param {object} obj object to search for
  * @returns {boolean} is obj in array
  */
-const objInArr = (arr, obj) =>
-  arr.some(elem => objectsEqual.deep(elem, obj));
+const objInArr = (arr, obj) => arr.some((elem) => objectsEqual.deep(elem, obj));
 
 const results = objInArr(params.data, params.object);
 

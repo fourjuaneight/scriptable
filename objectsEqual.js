@@ -8,8 +8,7 @@
  * @param {object} obj param to check against
  * @returns {boolean} is param an object
  */
-const isObj = (obj) =>
-  obj != null && typeof obj === 'object';
+const isObj = (obj) => obj != null && typeof obj === "object";
 
 /**
  * Determine if two objects are the same. Shallow check.
@@ -36,7 +35,6 @@ const shallow = (obj1, obj2) => {
   return true;
 };
 
-
 /**
  * Determine if two objects are the same. Deep check.
  * @function
@@ -58,10 +56,7 @@ const deep = (obj1, obj2) => {
     const val2 = obj2[key];
     const areObjs = isObj(val1) && isObj(val2);
 
-    if (
-      areObjs && !deep(val1, val2) ||
-      !areObjs && val1 !== val2
-    ) {
+    if ((areObjs && !deep(val1, val2)) || (!areObjs && val1 !== val2)) {
       return false;
     }
   }
