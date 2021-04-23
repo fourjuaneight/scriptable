@@ -35,12 +35,11 @@ const saveRecord = async (table, tableName, key, fields) => {
     const response = await request.loadJSON();
 
     return {
-      status: "ok",
+      ok: true,
       data: response.records[0].fields,
     };
-  } catch (err) {
-    console.error(err);
-    throw new Error(err);
+  } catch (error) {
+    return { error };
   }
 };
 
