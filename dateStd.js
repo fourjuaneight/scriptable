@@ -29,8 +29,6 @@ const isoDateTime = (date) =>
 // convert date to Unix time string
 const unixTime = Date.now();
 
-module.exports = {
-  isoDate,
-  isoDateTime,
-  unixTime,
-};
+exports.isoDate = isoDate;
+exports.isoDateTime = isoDateTime;
+exports.unixTime = unixTime;
