@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: deep-purple; icon-glyph: database;
+// icon-color: deep-blue; icon-glyph: database;
 const params = args.shortcutParameter;
 const response = JSON.parse(params.data);
 const key = params.key.length > 0 ? params.key : "url";

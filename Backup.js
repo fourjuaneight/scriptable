@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: deep-gray; icon-glyph: save;
+// icon-color: teal; icon-glyph: save;
 // Save any new changes from iCloud directory to Working Copy repo
 /**
  * Backup all iCloud script to a repo managed by WorkingCopy.

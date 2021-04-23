@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: purple; icon-glyph: gamepad;
+// icon-color: light-brown; icon-glyph: gamepad;
 /**
  * Get numbered day out of the year.
  * @function

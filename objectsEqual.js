@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: light-brown; icon-glyph: equals;
+// icon-color: orange; icon-glyph: equals;
 /**
  * Determine param is an object.
  * @function

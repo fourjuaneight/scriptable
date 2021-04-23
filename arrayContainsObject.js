@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: light-brown; icon-glyph: glasses;
+// icon-color: deep-blue; icon-glyph: glasses;
 const objectsEqual = importModule("objectsEqual.js");
 const params = args.shortcutParameter;
 

@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: deep-purple; icon-glyph: cloud-upload-alt;
+// icon-color: deep-green; icon-glyph: cloud-upload-alt;
 const params = args.shortcutParameter;
 
 /**

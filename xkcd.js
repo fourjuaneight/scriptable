@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: purple; icon-glyph: flask;
+// icon-color: light-brown; icon-glyph: flask;
 const BACKGROUND_DARK_MODE = "system";
 // options: "yes", "no", "system"
 

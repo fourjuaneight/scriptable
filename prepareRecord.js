@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: light-brown; icon-glyph: mortar-pestle;
+// icon-color: deep-blue; icon-glyph: mortar-pestle;
 const params = args.shortcutParameter;
 
 // format record to Airtable upload

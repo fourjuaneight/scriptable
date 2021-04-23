@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: green; icon-glyph: calculator;
+// icon-color: deep-blue; icon-glyph: calculator;
 /**
  * Return a fibonacci sequence as an array
  * @function

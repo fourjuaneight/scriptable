@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: light-brown; icon-glyph: clock;
+// icon-color: deep-blue; icon-glyph: clock;
 // share-sheet-inputs: url;
 /**
  * Convert Date to ISO.

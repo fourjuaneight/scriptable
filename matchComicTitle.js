@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: light-brown; icon-glyph: plug;
+// icon-color: deep-blue; icon-glyph: plug;
 const params = args.shortcutParameter;
 
 // match given url with options and pull title

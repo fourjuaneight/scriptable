@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: deep-purple; icon-glyph: cloud-download-alt;
+// icon-color: purple; icon-glyph: cloud-download-alt;
 const params = args.shortcutParameter;
 // test: https://castro.fm/episode/aSwDMX
 
