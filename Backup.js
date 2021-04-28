@@ -27,3 +27,4 @@ const backup = (localPath, repoPath) => {
 
 // Backup and save Scripts
 backup("scripts", "scriptable");
+Script.complete();

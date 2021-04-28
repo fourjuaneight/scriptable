@@ -3,6 +3,8 @@
 // icon-color: deep-blue; icon-glyph: glasses;
 const objectsEqual = importModule("objectsEqual.js");
 const params = args.shortcutParameter;
+const dataStr = args.plainTexts;
+const data = JSON.parse(dataStr[0]);
 
 /**
  * Determine if object is found in given array.
@@ -14,7 +16,7 @@ const params = args.shortcutParameter;
  */
 const objInArr = (arr, obj) => arr.some((elem) => objectsEqual.deep(elem, obj));
 
-const results = objInArr(params.data, params.object);
+const results = objInArr(data, params);
 
 Script.setShortcutOutput(results);
 Script.complete();

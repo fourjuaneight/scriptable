@@ -41,6 +41,11 @@ const getBookmarksWithOffset = async (offset = null) => {
 };
 
 await getBookmarksWithOffset();
+const cleanRecords = records.map((record) => {
+  delete record.fields.archive;
 
-Script.setShortcutOutput({ records });
+  return record.fields;
+});
+
+Script.setShortcutOutput({ ...params, records: cleanRecords });
 Script.complete();
