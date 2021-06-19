@@ -22,10 +22,7 @@ const aqiData = async () => {
   return {
     timestamp: data.aqi.datetime,
     ...aqi,
-    severity: aqi.category
-      .split(" ")
-      .map((str) => toCapitalized(str))
-      .join(" "),
+    severity: toCapitalized(aqi.category.replace("air quality", "")),
   };
 };
 
@@ -62,7 +59,9 @@ const run = async () => {
     wg.addSpacer(10);
 
     // add dominant pollutant to widget
-    const allergen = wg.addText(`Dominant: ${data.dominant_pollutant.toUpperCase()}`);
+    const allergen = wg.addText(
+      `Dominant: ${data.dominant_pollutant.toUpperCase()}`
+    );
     allergen.textColor = textColor;
     allergen.font = Font.mediumSystemFont(12);
 
