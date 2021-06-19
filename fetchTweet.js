@@ -44,11 +44,12 @@ const getTweetDetails = async (url, token) => {
     Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   };
+  QuickLook.present(endpoint);
 
   try {
-    const response = await request.loadJSON();
+    const response = await request.loadJSON();  
     const username = response.includes.users[0].username;
-    const formattedText = emojiToUnicode(response.data.text);
+    const formattedText = emojiToUnicode(response.data.text);  
     const cleanText = await expandShortenURLs(
       formattedText,
       /(https:\/\/t.co\/[a-zA-z0-9]+)/g
@@ -62,15 +63,11 @@ const getTweetDetails = async (url, token) => {
     };
   } catch (error) {
     console.error(error);
-    throw new Error(error);
+    return { error };
   }
 };
 
-if (params) {
-  const results = await getTweetDetails(params.url, params.key);
+const results = await getTweetDetails(params.url, params.key);
 
-  Script.setShortcutOutput(results);
-  Script.complete();
-}
-
-module.exports = getTweetDetails;
+Script.setShortcutOutput(results);
+Script.complete();
