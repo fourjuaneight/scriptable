@@ -34,19 +34,26 @@ const pollenDetails = async () => {
   const data = await pollenData();
   const keys = Object.keys(data.types);
   const inSeason = keys
-    .filter((type) => Boolean(data.types[type].in_season))
+    .filter((type) => Boolean(data.types[type].index.value))
     .map((type) => ({ ...data.types[type].index, type }));
-  const values = inSeason.map((allergen) => allergen.value);
-  const topAllergen = inSeason.sort((a, b) => (a.value > b.value ? 1 : -1))[0];
-  const average = values.length === 1 ? values[0] : arrAvg(values);
 
-  return {
-    timestamp: data.timestamp,
-    average,
-    severity: topAllergen.category,
-    color: topAllergen.color.replace("#", ""),
-    dominant_allergen: toCapitalized(topAllergen.type),
-  };
+  if (inSeason.length) {
+    const values = inSeason.map((allergen) => allergen.value);
+    const topAllergen = inSeason.sort((a, b) =>
+      a.value > b.value ? 1 : -1
+    )[0];
+    const average = values.length === 1 ? values[0] : arrAvg(values);
+
+    return {
+      timestamp: data.timestamp,
+      average,
+      severity: topAllergen.category,
+      color: topAllergen.color.replace("#", ""),
+      dominant_allergen: toCapitalized(topAllergen.type),
+    };
+  }
+
+  return null;
 };
 
 // Generate widget.
@@ -59,35 +66,44 @@ const run = async () => {
     const data = await pollenDetails();
 
     // generate widget background
-    const index = data.average.toString();
-    const textColor = new Color("000000");
-    const bgColor = new Color(data.color);
+    const index = data ? data.average.toString() : "0";
+    const textColor = new Color(data ? "000000" : "FFFFFF");
+    const bgColor = new Color(data ? data.color : "0B0D0F");
     wg.backgroundColor = bgColor;
 
-    // add widget header
+    if (data) {
+      // add widget header
     const header = wg.addText("Pollen");
     header.textColor = textColor;
     header.font = Font.regularSystemFont(15);
 
-    // add pollen index to widget
-    const content = wg.addText(index);
-    content.textColor = textColor;
-    content.font = Font.semiboldRoundedSystemFont(45);
+      // add pollen index to widget
+      const content = wg.addText(index);
+      content.textColor = textColor;
+      content.font = Font.semiboldRoundedSystemFont(45);
 
-    // add pollen severity to widget
-    const wordLevel = wg.addText(data.severity);
-    wordLevel.textColor = textColor;
-    wordLevel.font = Font.boldSystemFont(15);
+      // add pollen severity to widget
+      const wordLevel = wg.addText(data.severity);
+      wordLevel.textColor = textColor;
+      wordLevel.font = Font.boldSystemFont(15);
 
-    wg.addSpacer(10);
+      wg.addSpacer(10);
 
-    // add dominant allergen to widget
-    const allergen = wg.addText(`Dominant: ${data.dominant_allergen}`);
-    allergen.textColor = textColor;
-    allergen.font = Font.mediumSystemFont(12);
+      // add dominant allergen to widget
+      const allergen = wg.addText(`Dominant: ${data.dominant_allergen}`);
+      allergen.textColor = textColor;
+      allergen.font = Font.mediumSystemFont(12);
+    } else {
+      const wordLevel = wg.addText("No Pollen Data Available");
+      wordLevel.textColor = textColor;
+      wordLevel.font = Font.boldSystemFont(15);
+  
+      wg.addSpacer(60);
+    }
 
     // add timestamp to widget
-    const updatedAt = new Date(data.timestamp).toLocaleTimeString([], {
+    const date = data ? new Date(data.timestamp) : new Date();
+    const updatedAt = date.toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
     });
