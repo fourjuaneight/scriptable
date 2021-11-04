@@ -58,5 +58,5 @@ if (config.runsInWidget) {
   Script.complete();
 } else {
   const url = `https://serebii.net/pokedex/${numberDay()}.html`;
-  console.log(url);
+  Safari.open(url);
 }
