@@ -1,1 +1,1 @@
-FROM ghcr.io/fourjuaneight/development:main
+FROM ghcr.io/fourjuaneight/development:fedora
