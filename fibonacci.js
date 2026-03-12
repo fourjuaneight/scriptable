@@ -8,7 +8,7 @@
  * @param {number} num
  * @return {number[]}
  */
-const fibonacci = (num) => {
+const fibonacci = num => {
   const fibSequence = [1];
 
   let currentValue = 1;

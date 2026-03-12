@@ -12,7 +12,7 @@ const params = args.shortcutParameter;
  * @param {string} url post url
  * @returns {Promise<object>} reddit title, content, subreddit, and url
  */
-const getRedditDetails = async (url) => {
+const getRedditDetails = async url => {
   const request = new Request(`${url}.json`);
 
   try {
@@ -20,11 +20,11 @@ const getRedditDetails = async (url) => {
     const post = response[0].data.children[0].data;
 
     return {
-      title: post.title,
+      category: 'Reddits',
       content: post.selftext || post.url_overridden_by_dest,
       subreddit: `r/${post.subreddit}`,
+      title: post.title,
       url,
-      category: "Reddits",
     };
   } catch (error) {
     console.error(error);

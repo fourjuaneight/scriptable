@@ -7,8 +7,8 @@ const baseDate = args.shortcutParameter;
 const dateHex = baseDate
   .match(/\d{2,4}/g)
   .map(Number)
-  .map((char) => char.toString(16))
-  .join("");
+  .map(char => char.toString(16))
+  .join('');
 
 Script.setShortcutOutput(dateHex);
 Script.complete();

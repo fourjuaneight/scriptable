@@ -1,8 +1,8 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: purple; icon-glyph: cloud-download-alt;
-const emojiToUnicode = importModule("emojiToUnicode.js");
-const expandShortenURLs = importModule("expandShortenURLs.js");
+const emojiToUnicode = importModule('emojiToUnicode.js');
+const expandShortenURLs = importModule('expandShortenURLs.js');
 const params = args.shortcutParameter;
 
 // test: https://twitter.com/fourjuaneight/status/1375312420583976960?s=20
@@ -14,12 +14,12 @@ const params = args.shortcutParameter;
  * @param {string} url tweet url
  * @returns {string} API endpoint to fetch tweet data
  */
-const cleanUrl = (url) => {
+const cleanUrl = url => {
   const updatedStr = url
-    .replace(/(https\:\/\/([a-z]+\.)?twitter\.com\/)/g, "")
+    .replace(/(https\:\/\/([a-z]+\.)?twitter\.com\/)/g, '')
     .replace(
       /.*\/status\/([0-9]+)(.*)?/g,
-      "https://api.twitter.com/2/tweets/$1"
+      'https://api.twitter.com/2/tweets/$1',
     );
 
   return updatedStr;
@@ -37,29 +37,29 @@ const cleanUrl = (url) => {
 const getTweetDetails = async (url, token) => {
   const endpoint = cleanUrl(url);
   const request = new Request(
-    `${endpoint}?tweet.fields=created_at&user.fields=username&expansions=author_id`
+    `${endpoint}?tweet.fields=created_at&user.fields=username&expansions=author_id`,
   );
 
   request.headers = {
     Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
   QuickLook.present(endpoint);
 
   try {
-    const response = await request.loadJSON();  
+    const response = await request.loadJSON();
     const username = response.includes.users[0].username;
-    const formattedText = emojiToUnicode(response.data.text);  
+    const formattedText = emojiToUnicode(response.data.text);
     const cleanText = await expandShortenURLs(
       formattedText,
-      /(https:\/\/t.co\/[a-zA-z0-9]+)/g
+      /(https:\/\/t.co\/[a-zA-z0-9]+)/g,
     );
 
     return {
-      tweet: cleanText,
+      category: 'Tweets',
       creator: `@${username}`,
+      tweet: cleanText,
       url: `https://twitter.com/${username}/status/${response.data.id}`,
-      category: "Tweets",
     };
   } catch (error) {
     console.error(error);

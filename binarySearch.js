@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: green; icon-glyph: search-minus;
-const { equal, lessThan } = importModule("comparison");
+const { equal, lessThan } = importModule('comparison');
 
 /**
  * Binary search implementation.

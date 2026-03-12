@@ -3,7 +3,7 @@
 // icon-color: deep-blue; icon-glyph: pencil-alt;
 const src = args.shortcutParameter;
 
-const data = {  
+const data = {
   'very fast': 'hurriedly',
   'very happy': 'overjoyed',
   'very hungry': 'famished',
@@ -32,7 +32,7 @@ const data = {
   'very short': 'brief',
   'very shy': 'timid',
   'very simple': 'basic',
-  'very slow': 'sluggish'
+  'very slow': 'sluggish',
 };
 
 /**
@@ -64,14 +64,8 @@ const multiReplace = (string, pattern, replaceValue) => {
 const replaceAll = (string, list) => {
   let originalString = string;
 
-  for (const toReplace in list) {
-      if (Object.hasOwnProperty.call(list, toReplace)) {
-          originalString = multiReplace(
-              originalString,
-              toReplace,
-              list[toReplace]
-          );
-      }
+  for (const [toReplace, replacement] of Object.entries(list)) {
+    originalString = multiReplace(originalString, toReplace, replacement);
   }
 
   return originalString;

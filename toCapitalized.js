@@ -9,8 +9,8 @@
  *
  * @returns {string} capitalized word
  */
-const toCapitalized = (str) => {
-  if (str && typeof str === "string") {
+const toCapitalized = str => {
+  if (str && typeof str === 'string') {
     return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
   }
 

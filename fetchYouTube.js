@@ -12,10 +12,10 @@ const params = args.shortcutParameter;
  * @param {string} url video url
  * @returns {object} API endpoint to fetch video data + bookmarking ready url
  */
-const cleanUrl = (url) => {
+const cleanUrl = url => {
   const extractedID = url
-    .replace(/(https\:\/\/)(youtu.*)\.(be|com)\/(watch\?v=)?/g, "")
-    .replace("&feature=share", "");
+    .replace(/(https\:\/\/)(youtu.*)\.(be|com)\/(watch\?v=)?/g, '')
+    .replace('&feature=share', '');
   const endpoint = `https://youtube.googleapis.com/youtube/v3/videos?id=${extractedID}`;
   const link = `https://youtu.be/${extractedID}`;
 
@@ -40,10 +40,10 @@ const getYouTubeDetails = async (url, key) => {
     const video = response.items[0].snippet;
 
     return {
-      title: video.title,
+      category: 'Videos',
       creator: video.channelTitle,
+      title: video.title,
       url: link,
-      category: "Videos",
     };
   } catch (error) {
     console.error(error);

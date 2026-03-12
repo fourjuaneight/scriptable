@@ -18,21 +18,20 @@ const getBookmarksWithOffset = async (offset = null) => {
     : `${params.endpoint}`;
   const request = new Request(url);
 
-  request.method = "GET";
+  request.method = 'GET';
   request.headers = {
     Authorization: `Bearer ${params.auth}`,
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
 
   try {
-    return request.loadJSON().then(async (airtableRes) => {
+    return request.loadJSON().then(async airtableRes => {
       records = [...records, ...airtableRes.records];
 
       if (airtableRes.offset) {
         return getBookmarksWithOffset(airtableRes.offset);
-      } else {
-        return airtableRes;
       }
+      return airtableRes;
     });
   } catch (error) {
     console.error(error);
@@ -41,7 +40,7 @@ const getBookmarksWithOffset = async (offset = null) => {
 };
 
 await getBookmarksWithOffset();
-const cleanRecords = records.map((record) => {
+const cleanRecords = records.map(record => {
   delete record.fields.archive;
 
   return record.fields;

@@ -21,11 +21,11 @@ const getAirData = async (lat, long) => {
   `;
 
   try {
-    const request = new Request("https://api.mapmyair.com/graphql");
+    const request = new Request('https://api.mapmyair.com/graphql');
 
-    request.method = "POST";
+    request.method = 'POST';
     request.headers = {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     };
     request.body = JSON.stringify({
       query: `
@@ -64,8 +64,8 @@ const getAirData = async (lat, long) => {
     const aqi = results.data.airquality;
 
     return {
-      pollen: pollen[0],
       aqi,
+      pollen: pollen[0],
     };
   } catch (error) {
     console.error(error);

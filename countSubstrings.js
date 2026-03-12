@@ -4,7 +4,7 @@
 /**
  * Counts the occurrences of a substring in a given string.
  * @function
- * 
+ *
  * @param {string} str string to search
  * @param {string} searchValue value to search for
  * @returns {number} found occurrences
@@ -21,8 +21,8 @@ const countSubstrings = (str, searchValue) => {
       // increment if the value is found and update the inde
       [count, index] = [count + 1, round + 1];
     } else {
-      return count
-    };
+      return count;
+    }
   }
 };
 

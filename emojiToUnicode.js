@@ -2,7 +2,7 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-blue; icon-glyph: meh-blank;
 // share-sheet-inputs: url;
-const range = importModule("unicodeRange.js");
+const range = importModule('unicodeRange.js');
 
 /**
  * Get the unicode code of an emoji in base 16.
@@ -11,7 +11,7 @@ const range = importModule("unicodeRange.js");
  * @param {string} emojiString the string containing emoji characters
  * @returns {string} the unicode code
  */
-const convertEmoji = (emojiString) => {
+const convertEmoji = emojiString => {
   let comp;
 
   if (emojiString.length === 1) {
@@ -40,7 +40,6 @@ const convertEmoji = (emojiString) => {
  * @param {string} tweet tweet string with emojies
  * @return {string} tweet with unicode emojies
  */
-const emojiUnicode = (tweet) =>
-  tweet.replace(range, (p1) => `${convertEmoji(p1)}`);
+const emojiUnicode = tweet => tweet.replace(range, p1 => `${convertEmoji(p1)}`);
 
 module.exports = emojiUnicode;

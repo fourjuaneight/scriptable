@@ -16,7 +16,7 @@ const backup = (localPath, repoPath) => {
   const repo = FM.bookmarkedPath(repoPath);
   const scripts = FM.listContents(local);
 
-  scripts.forEach((script) => {
+  scripts.forEach(script => {
     const updated = FM.readString(`${local}/${script}`);
 
     if (updated !== null) {
@@ -26,5 +26,5 @@ const backup = (localPath, repoPath) => {
 };
 
 // Backup and save Scripts
-backup("scripts", "scriptable");
+backup('scripts', 'scriptable');
 Script.complete();

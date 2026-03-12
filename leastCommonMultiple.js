@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-blue; icon-glyph: calculator;
-const euclideanGCD = importModule("euclideanGCD");
+const euclideanGCD = importModule('euclideanGCD');
 
 /**
  * Fing lowest common multiple (LCM) or smallest common multiple of two integers

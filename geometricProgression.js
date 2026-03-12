@@ -4,7 +4,7 @@
 /**
  * Initializes an array containing the numbers in the specified range where start and end are inclusive and the ratio between two terms is step.
  * @function
- * 
+ *
  * @param {number} end
  * @param {number} start
  * @param {number} step
@@ -15,6 +15,6 @@ const geometricProgression = (end, start = 1, step = 2) =>
   Array.from({
     length: Math.floor(Math.log(end / start) / Math.log(step)) + 1,
     // fill with the desired values in a rang
-  }).map((_, index) => start * step ** index);
+  }).map((_el, index) => start * step ** index);
 
 module.exports = geometricProgression;

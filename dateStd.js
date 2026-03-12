@@ -9,7 +9,7 @@
  * @param {Date} date date to convert
  * @returns {string} ISO date string
  */
-const isoDate = (date) =>
+const isoDate = date =>
   new Date(date - date.getTimezoneOffset() * 60000)
     .toISOString()
     .substring(0, 10);
@@ -21,7 +21,7 @@ const isoDate = (date) =>
  * @param {Date} date date to convert
  * @returns {string} ISO datetime string
  */
-const isoDateTime = (date) =>
+const isoDateTime = date =>
   new Date(date - date.getTimezoneOffset() * 60000)
     .toISOString()
     .substring(0, 19);

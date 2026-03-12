@@ -8,18 +8,18 @@
  * @param {number | string} num
  * @returns {boolean} true if sum is divisible by 10, false otherwise
  */
-const luhnCheck = (num) => {
+const luhnCheck = num => {
   // obtain array of digits
-  let arr = (num + "")
-    .split("")
+  const arr = (num + '')
+    .split('')
     .reverse()
-    .map((x) => parseInt(x));
+    .map(x => parseInt(x));
   // obtain last digit
-  let lastDigit = arr.splice(0, 1)[0];
+  const lastDigit = arr.splice(0, 1)[0];
   // implement algorith
   let sum = arr.reduce(
     (acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9),
-    0
+    0,
   );
 
   sum += lastDigit;

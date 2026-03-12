@@ -4,7 +4,7 @@
 const createEventDate = () => {
   const str = '2020-10-13T17:00:00Z';
   const dateFormatter = new DateFormatter();
-  dateFormatter.dateFormat = 'yyyy-MM-dd\'T\'HH:mm:ssZ';
+  dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ";
 
   return dateFormatter.date(str);
 };

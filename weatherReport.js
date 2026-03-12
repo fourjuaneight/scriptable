@@ -4,23 +4,23 @@
 const params = args.shortcutParameter;
 
 const responses = {
-  100: "You'll Die.",
-  90: "It's Hot.",
-  80: "It's Warm.",
-  70: "It's Alright.",
-  60: "It's Nice.",
-  50: "It's Chilly.",
-  40: "It's Cold.",
-  30: "It's Freezing.",
   20: "It's a good day to stay inside.",
+  30: "It's Freezing.",
+  40: "It's Cold.",
+  50: "It's Chilly.",
+  60: "It's Nice.",
+  70: "It's Alright.",
+  80: "It's Warm.",
+  90: "It's Hot.",
+  100: "You'll Die.",
 };
 
 const closest = (ranges, current) => {
-  const closest = ranges.reduce((prev, curr) =>
-    Math.abs(curr - current) < Math.abs(prev - current) ? curr : prev
+  const result = ranges.reduce((prev, curr) =>
+    Math.abs(curr - current) < Math.abs(prev - current) ? curr : prev,
   );
 
-  return closest;
+  return result;
 };
 const filter = closest(Object.keys(responses), params);
 const results = responses[filter];

@@ -4,12 +4,12 @@
 /**
  * Get the powerset of a given array of numbers.
  * @function
- * 
+ *
  * @param {number[]} arr dataset
  * @returns {number[]][] | any[][]}
  */
-const powerset = (arr) =>
+const powerset = arr =>
   // iterate over elements and combine into an array containing all combinations
-  arr.reduce((a, v) => a.concat(a.map((r) => [v].concat(r))), [[]]);
+  arr.reduce((a, val) => a.concat(a.map(rs => [val].concat(rs))), [[]]);
 
-module.exports = powerset
+module.exports = powerset;

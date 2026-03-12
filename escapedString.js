@@ -4,8 +4,8 @@
 const params = args.shortcutParameter;
 
 const cleanTitle = params.title
-  .replace(/(["':]+)/g, "\\$1")
-  .replace(/([,]+)/g, "\\$1");
+  .replace(/(["':]+)/g, '\\$1')
+  .replace(/([,]+)/g, '\\$1');
 const results = {
   ...params,
   title: cleanTitle,

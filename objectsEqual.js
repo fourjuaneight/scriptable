@@ -8,7 +8,7 @@
  * @param {object} obj param to check against
  * @returns {boolean} is param an object
  */
-const isObj = (obj) => obj != null && typeof obj === "object";
+const isObj = obj => obj != null && typeof obj === 'object';
 
 /**
  * Determine if two objects are the same. Shallow check.
@@ -26,7 +26,7 @@ const shallow = (obj1, obj2) => {
     return false;
   }
 
-  for (let key of keys1) {
+  for (const key of keys1) {
     if (obj1[key] !== obj2[key]) {
       return false;
     }

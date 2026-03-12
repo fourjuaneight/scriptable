@@ -4,7 +4,7 @@
 const params = args.shortcutParameter;
 
 // filter out falsy values
-const validate = (val) => val;
+const validate = val => val;
 const isValid = params.every(validate);
 
 Script.setShortcutOutput(isValid);

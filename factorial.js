@@ -8,7 +8,7 @@
  * @param {number} num
  * @return {number}
  */
-const factorial = (num) => {
+const factorial = num => {
   let result = 1;
 
   for (let i = 2; i <= num; i += 1) {

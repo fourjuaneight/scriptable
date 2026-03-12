@@ -4,7 +4,7 @@
 const { data } = args.shortcutParameter;
 
 // add id and sort tags alphabetically for all records
-const cleanRecords = data.map((record) => ({
+const cleanRecords = data.map(record => ({
   id: UUID.string(),
   ...record.fields,
   tags: record.fields.tags.sort(),

@@ -5,9 +5,9 @@
 // based on code by Matt Silverlock
 // gradient routine contributed by Rob Silverii
 // pretty formatting and functioning by Adam Lickel
-const getAirData = importModule("getAirData");
-const roundTo = importModule("roundTo");
-const toCapitalized = importModule("toCapitalized");
+const getAirData = importModule('getAirData');
+const roundTo = importModule('roundTo');
+const toCapitalized = importModule('toCapitalized');
 
 // Get AQI data by plant type.
 const aqiData = async () => {
@@ -22,7 +22,7 @@ const aqiData = async () => {
   return {
     timestamp: data.aqi.datetime,
     ...aqi,
-    severity: toCapitalized(aqi.category.replace("air quality", "")),
+    severity: toCapitalized(aqi.category.replace('air quality', '')),
   };
 };
 
@@ -37,12 +37,12 @@ const run = async () => {
 
     // generate widget background
     const index = data.aqi.toString();
-    const textColor = new Color("000000");
+    const textColor = new Color('000000');
     const bgColor = new Color(data.color);
     wg.backgroundColor = bgColor;
 
     // add widget header
-    const header = wg.addText("AQI");
+    const header = wg.addText('AQI');
     header.textColor = textColor;
     header.font = Font.regularSystemFont(15);
 
@@ -60,29 +60,29 @@ const run = async () => {
 
     // add dominant pollutant to widget
     const allergen = wg.addText(
-      `Dominant: ${data.dominant_pollutant.toUpperCase()}`
+      `Dominant: ${data.dominant_pollutant.toUpperCase()}`,
     );
     allergen.textColor = textColor;
     allergen.font = Font.mediumSystemFont(12);
 
     // add timestamp to widget
     const updatedAt = new Date(data.timestamp).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
+      hour: '2-digit',
+      minute: '2-digit',
     });
     const ts = wg.addText(`Updated ${updatedAt}`);
     ts.textColor = textColor;
     ts.font = Font.lightSystemFont(10);
 
     wg.addSpacer(10);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
 
     // add error to widget
-    const err = wg.addText(`${e}`);
-    err.textColor = Color.red();
-    err.textOpacity = 30;
-    err.font = Font.regularSystemFont(10);
+    const error = wg.addText(`${err}`);
+    error.textColor = Color.red();
+    error.textOpacity = 30;
+    error.font = Font.regularSystemFont(10);
   }
 
   if (config.runsInApp) {

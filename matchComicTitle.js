@@ -4,7 +4,7 @@
 const params = args.shortcutParameter;
 
 // match given url with options and pull title
-const match = params.options.filter((item) => params.url.includes(item.url));
+const match = params.options.filter(item => params.url.includes(item.url));
 const results = match.length !== 0 ? match[0].title : null;
 
 Script.setShortcutOutput(results);

@@ -24,10 +24,10 @@ const saveRecord = async (table, tableName, key, fields) => {
   };
   const request = new Request(endpoint);
 
-  request.method = "POST";
+  request.method = 'POST';
   request.headers = {
     Authorization: `Bearer ${key}`,
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   };
   request.body = JSON.stringify(payload);
 
@@ -35,8 +35,8 @@ const saveRecord = async (table, tableName, key, fields) => {
     const response = await request.loadJSON();
 
     return {
-      ok: true,
       data: response.records[0].fields,
+      ok: true,
     };
   } catch (error) {
     return { error };
@@ -47,7 +47,7 @@ const results = await saveRecord(
   params.table,
   params.tableName,
   params.key,
-  params.fields
+  params.fields,
 );
 
 Script.setShortcutOutput(results);

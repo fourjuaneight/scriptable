@@ -3,9 +3,7 @@
 // icon-color: deep-blue; icon-glyph: calculator;
 const { hour, start, end } = args.shortcutParameter;
 const txtParams = args.plainTexts;
-const reverse =
-  txtParams.length > 0 ? (txtParams[0] === "reverse" ? true : false) : false;
-
+const reverse = txtParams.length > 0 ? txtParams[0] === 'reverse' : false;
 
 /**
  * Is given value between provided range.

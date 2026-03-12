@@ -24,7 +24,7 @@ const numberDay = () => {
  * @param {string} str string to be capitalized
  * @returns {string} capitalized string
  */
-const toCapitalized = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+const toCapitalized = str => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 
 const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${numberDay()}`;
 const request = new Request(pokemonUrl);
@@ -35,7 +35,7 @@ if (config.runsInWidget) {
   const widget = new ListWidget();
 
   const imgReqBq = await new Request(
-    "https://i.pinimg.com/originals/aa/34/e1/aa34e1c76a6569a36499ae86098759ee.jpg"
+    'https://i.pinimg.com/originals/aa/34/e1/aa34e1c76a6569a36499ae86098759ee.jpg',
   );
   const imgBq = await imgReqBq.loadImage();
 
@@ -45,7 +45,7 @@ if (config.runsInWidget) {
   const namePokemon = widget.addText(toCapitalized(response.name));
   namePokemon.textColor = Color.black();
   namePokemon.textOpacity = 0.8;
-  namePokemon.font = new Font("Courier", 14);
+  namePokemon.font = new Font('Courier', 14);
   namePokemon.centerAlignText();
 
   const imgRequest = await new Request(response.sprites.front_default);

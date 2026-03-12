@@ -12,10 +12,10 @@ const params = args.shortcutParameter;
  * @param {string} url video url
  * @returns {string} API endpoint to fetch video data
  */
-const cleanUrl = (url) => {
+const cleanUrl = url => {
   const updatedStr = url.replace(
     /(https\:\/\/vimeo\.com\/)(.*)/g,
-    "https://api.vimeo.com/videos/$2"
+    'https://api.vimeo.com/videos/$2',
   );
 
   return updatedStr;
@@ -42,10 +42,10 @@ const getVimeoDetails = async (url, token) => {
     const response = await request.loadJSON();
 
     return {
-      title: response.name,
+      category: 'Videos',
       creator: response.user.name,
+      title: response.name,
       url,
-      category: "Videos",
     };
   } catch (error) {
     console.error(error);

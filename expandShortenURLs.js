@@ -8,14 +8,14 @@
  * @param {string} url shortned url string
  * @returns {Promise<string>} expanded URL
  */
-const expandLinks = async (url) => {
+const expandLinks = async url => {
   try {
     const request = new Request(url);
     await request.load();
 
     if (!request.response.url) {
       console.error({
-        message: "Expand Links: unable to expand URL.",
+        message: 'Expand Links: unable to expand URL.',
         status: request.response.statusCode,
       });
       return url;
@@ -23,7 +23,7 @@ const expandLinks = async (url) => {
 
     return request.response.url;
   } catch (error) {
-    console.error("Expand Links:", error);
+    console.error('Expand Links:', error);
     return url;
   }
 };
@@ -40,7 +40,7 @@ const expandShortLink = async (str, regex) => {
   const promises = [];
   const pattern = new RegExp(regex);
 
-  str.replace(pattern, (match, ...args) => {
+  str.replace(pattern, match => {
     const promise = expandLinks(match);
     promises.push(promise);
 
@@ -48,7 +48,7 @@ const expandShortLink = async (str, regex) => {
   });
 
   const data = await Promise.all(promises);
-  const replacer = () => data.shift() ?? "";
+  const replacer = () => data.shift() ?? '';
 
   return str.replace(regex, replacer);
 };

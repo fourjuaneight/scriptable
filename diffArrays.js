@@ -13,7 +13,7 @@ const params = args.shortcutParameter;
  * @returns {array} diff between two arrays
  */
 const diffArrays = (arr1, arr2, key) =>
-  arr1.filter((item1) => !arr2.some((item2) => item1[key] === item2[key]));
+  arr1.filter(item1 => !arr2.some(item2 => item1[key] === item2[key]));
 
 const results = diffArrays(params.data.arr1, params.data.arr2, params.key);
 
