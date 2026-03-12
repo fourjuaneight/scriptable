@@ -2,6 +2,7 @@
   "name": "scriptable",
   "version": "1.0.0",
   "description": "Collection of Scriptable helper scripts (internal and for Shortcuts).",
+  "packageManager": "pnpm@10.28.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fourjuaneight/scriptable.git"
@@ -19,30 +20,22 @@
   "scripts": {
     "clean:node": "rm -rf node_modules",
     "format": "prettier --write \"*.js\"",
-    "lint": "eslint --fix \"*.js\""
+    "lint": "eslint --fix \"*.js\"",
+    "prepare": "husky"
   },
   "lint-staged": {
-    "*.(ts|tsx)": [
-      "npm lint"
-    ],
-    "*.+(ts|tsx|css|scss)": [
-      "npm format",
-      "git add"
+    "*.js": [
+      "pnpm lint",
+      "pnpm format"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "dependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/eslint-parser": "^7.11.3",
-    "eslint": "^7.6.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^4.3.8",
-    "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5"
+  "devDependencies": {
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.5",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3"
   }
 }

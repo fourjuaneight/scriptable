@@ -1,8 +1,8 @@
 module.exports = {
   arrowParens: 'avoid',
+  bracketSameLine: false,
   bracketSpacing: true,
   endOfLine: 'auto',
-  jsxBracketSameLine: false,
   overrides: [
     {
       files: '*.json',
@@ -13,10 +13,9 @@ module.exports = {
   ],
   printWidth: 80,
   proseWrap: 'preserve',
-  requirePragma: false,
   semi: true,
   singleQuote: true,
   tabWidth: 2,
-  trailingComma: 'es5',
+  trailingComma: 'all',
   useTabs: false,
 };
