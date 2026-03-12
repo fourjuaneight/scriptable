@@ -28,6 +28,19 @@ Valid `icon-color` values: `red`, `deep-gray`, `light-gray`, `white`, `yellow`, 
 - **JSDoc comments** on every named function: `@function`, `@param`, `@returns`
 - No `console.log` — use `console.warn` or `console.error` for diagnostics
 
+## Formatting & Linting
+
+After writing or modifying any script, always run both tools:
+
+```sh
+pnpm format   # Prettier — auto-formats all *.js files
+pnpm lint     # ESLint --fix — fixes violations and reports remaining errors
+```
+
+- **Formatter** (`pnpm format`) must always be run — it enforces single quotes, trailing commas, print width, etc.
+- **Linter** (`pnpm lint`) must always be run and must produce **zero errors** before the script is considered complete. Warnings are acceptable; errors are not.
+- Fix any ESLint errors reported after `pnpm lint` before finishing.
+
 ## Key Scriptable Globals
 
 ### Script lifecycle
